@@ -289,11 +289,11 @@ def metrics(metric):
             dtstr = f'{day}+{hour}'
             dt = datetime.datetime.strptime(dtstr, '%Y-%m-%d+%H:%M')
             epoch = calendar.timegm(dt.timetuple())
-      loop_dt = datetime.datetime.strptime(day, '%Y-%m-%d')
-      elapsed = now - loop_dt
-      duration_in_d = elapsed.days
-      if duration_in_d < 300:
-         output.append({"x": epoch, "y": item[metric]})
+        loop_dt = datetime.datetime.strptime(day, '%Y-%m-%d')
+        elapsed = now - loop_dt
+        duration_in_d = elapsed.days
+        if duration_in_d < 300:
+            output.append({"x": epoch, "y": item[metric]})
     return jsonify(output)
 
 def main():
