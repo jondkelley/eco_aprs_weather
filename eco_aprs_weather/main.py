@@ -289,7 +289,10 @@ def metrics(metric):
             dtstr = f'{day}+{hour}'
             dt = datetime.datetime.strptime(dtstr, '%Y-%m-%d+%H:%M')
             epoch = calendar.timegm(dt.timetuple())
-        output.append({"x": epoch, "y": item[metric]})
+            try:
+                output.append({"x": epoch, "y": float(item[metric])})
+            except ValueError:
+                output.append({"x": epoch, "y": int(item[metric])})
     return jsonify(output)
 
 def main():
