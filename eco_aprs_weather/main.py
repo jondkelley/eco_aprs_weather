@@ -9,7 +9,7 @@ this is in very early stages of development but I plan to throw better documenta
 keep an eye on this igate for announcements when you can build your own!
 thanks to N5AMD to donating the hardware (Radio, Rasberry Pi 1 (rev 2011.12) for this project, without this the code would never have been written
 """
-from flask import Flask, render_template, request, make_response, url_for, send_from_directory
+from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort
 import json
 import dateutil.parser
 import hashlib
@@ -101,8 +101,10 @@ def wxnow():
         'temp_outdoor': 'temp2f',
         'humidity_outdoor': 'humidity2'
     }
-
-    return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
+    try:
+      return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
+    except KeyError:
+      return abort(500, 'error: weather unavailable right now') 
 
 @app.route('/data/metrics.json', methods=['GET'])
 @app.route('/data/metric.json', methods=['GET'])
