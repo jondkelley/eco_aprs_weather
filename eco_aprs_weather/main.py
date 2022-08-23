@@ -184,37 +184,8 @@ def weather_query():
     """ read the last raw weather report out of memory """
     return singleton.weather
 
-# def update_wx_metric_into_memory(post_dict):
-#    """ constantly updates a table in memory with last metric totals at top of the hour """
-#    utchour = post_dict['dateutc'].split('+')[1].split(':')[:-2][0]
-#    utcday = post_dict['dateutc'].split('+')[0]
-#    post_dict = post_dict.copy()
-#    del post_dict['PASSKEY']
-#    del post_dict['stationtype']
-#    del post_dict['model']
-#    del post_dict['freq']
-#    todelete = []
-#    for key in post_dict:
-#       if 'batt' in key:
-#          todelete.append(key)
-#    for key in todelete:
-#          del post_dict[key]
-#    todelete = []
-#    for key in post_dict:
-#       if 'rain' in key:
-#          todelete.append(key)
-#    for key in todelete:
-#          del post_dict[key]
-#    if utcday in wx.metrics:
-#       wx.metrics[utcday][utchour] = post_dict
-#    else:
-#       wx.metrics[utcday] = {}
-#       wx.metrics[utcday][utchour] = post_dict
-
 def update_wx_metric_into_memory(post_dict):
    """ constantly updates a table in memory with last metric totals at top of the hour """
-   # TODO maybe add config to override tz TODO
-   tz = datetime.datetime.utcnow(datetime.timezone.utc).astimezone().tzinfo
    # unused? utcminute = ":".join(post_dict['dateutc'].split('+')[1].split(':')[:-1])
    utcday = post_dict['dateutc'].split('+')[0]
    RUN_EVERY_MINUTE = False
