@@ -16,8 +16,10 @@ import hashlib
 import os
 import time
 import datetime
+import configparser
 
 app = Flask(__name__)
+
 class TelemetrySingleton(object):
    """
    this singleton stores a snapshot of the latest telemetry packet in memory
@@ -277,6 +279,13 @@ def about():
       }
     }
     return out
+
+@app.route('/graph/metric/<metric>', methods=['GET'])
+def metrics(metric):
+    output = list()
+    for day, v in wx.metrics.items():
+        for hour, item in v.items():
+            return str(day, hour, item)
 
 def main():
     app.run(host='0.0.0.0', port=5000)
