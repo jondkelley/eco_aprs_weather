@@ -9,7 +9,7 @@ this is in very early stages of development but I plan to throw better documenta
 keep an eye on this igate for announcements when you can build your own!
 thanks to N5AMD to donating the hardware (Radio, Rasberry Pi 1 (rev 2011.12) for this project, without this the code would never have been written
 """
-from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort
+from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort, jsonify
 import json
 import dateutil.parser
 import hashlib
@@ -17,6 +17,7 @@ import os
 import time
 import datetime
 import configparser
+import calendar
 
 app = Flask(__name__)
 
@@ -285,7 +286,15 @@ def metrics(metric):
     output = list()
     for day, v in wx.metrics.items():
         for hour, item in v.items():
-            return str(day, hour, item)
+            dtstr = f'{day}+{hour}'
+            dt = datetime.datetime.strptime(dtstr, '%Y-%m-%d+%H:%M')
+            epoch = calendar.timegm(dt.timetuple())
+      loop_dt = datetime.datetime.strptime(day, '%Y-%m-%d')
+      elapsed = now - loop_dt
+      duration_in_d = elapsed.days
+      if duration_in_d < 300:
+         output.append({"x": epoch, "y": item[metric]})
+    return jsonify(output)
 
 def main():
     app.run(host='0.0.0.0', port=5000)
