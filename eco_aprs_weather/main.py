@@ -55,7 +55,7 @@ def calculate_24hour_rainfall():
    calculates rainfall within the past 24 hours since ecowitt devices only transmit the "last day" metric
    """
    total_rainfall = 0
-   now = datetime.datetime.now()
+   now = datetime.datetime.utcnow()
    for day, v in wx.hourlyrainfall.items(): 
       for hour, rainfall in v.items():
          time = f'{day}+{hour}:00:00'
@@ -68,7 +68,7 @@ def calculate_24hour_rainfall():
    return total_rainfall
 
 def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin):
-    dt = datetime.datetime.now()
+    dt = datetime.datetime.utcnow()
     fields = []
     fields.append("%03d" % int(winddir)) # wind dir
     fields.append("/%03d" % int(float(windspeedmph))) # wind speed
@@ -140,7 +140,7 @@ def purge_old_rainfall():
    purges rainfall record in memory to keep stack under control
    returns the number of records purged
    """
-   now = datetime.datetime.now()
+   now = datetime.datetime.utcnow()
    keys_to_remove = []
    number_keys_to_remove = 0
    for day in wx.hourlyrainfall:
@@ -161,7 +161,7 @@ def purge_old_metics():
    purges rainfall record in memory to keep stack under control
    returns the number of records purged
    """
-   now = datetime.datetime.now()
+   now = datetime.datetime.utcnow()
    keys_to_remove = []
    number_keys_to_remove = 0
    for day in wx.metrics:
@@ -212,11 +212,11 @@ def weather_query():
 def update_wx_metric_into_memory(post_dict):
    """ constantly updates a table in memory with last metric totals at top of the hour """
    # TODO maybe add config to override tz TODO
-   tz = datetime.datetime.now(datetime.timezone.utc).astimezone().tzinfo
+   tz = datetime.datetime.utcnow(datetime.timezone.utc).astimezone().tzinfo
    # unused? utcminute = ":".join(post_dict['dateutc'].split('+')[1].split(':')[:-1])
    utcday = post_dict['dateutc'].split('+')[0]
    RUN_EVERY_MINUTE = False
-   if datetime.datetime.now().minute in {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0} or RUN_EVERY_MINUTE:
+   if datetime.datetime.utcnow().minute in {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0} or RUN_EVERY_MINUTE:
       #datetime.datetime.strptime(post_dict['dateutc'], '%Y-%m-%d+%H:%M:%S').
       post_dict = post_dict.copy()
       del post_dict['PASSKEY']
@@ -237,10 +237,10 @@ def update_wx_metric_into_memory(post_dict):
             del post_dict[key]
 
       if utcday in wx.metrics:
-         wx.metrics[utcday][datetime.datetime.now().strftime("%H:%M")] = post_dict
+         wx.metrics[utcday][datetime.datetime.utcnow().strftime("%H:%M")] = post_dict
       else:
          wx.metrics[utcday] = {}
-         wx.metrics[utcday][datetime.datetime.now().strftime("%H:%M")] = post_dict
+         wx.metrics[utcday][datetime.datetime.utcnow().strftime("%H:%M")] = post_dict
 
 def update_hourlyrainfall_into_memory(post_dict):
    """ constantly updates a table in memory with latest hourly rainfall totals """
