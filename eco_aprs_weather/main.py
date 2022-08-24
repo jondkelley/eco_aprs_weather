@@ -25,6 +25,9 @@ config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'status_message', fallback='')
+      self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempinf')
+      self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidityin')
+      self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
    def __new__(cls):
       if not hasattr(cls, 'instance'):
          cls.instance = super(Configuration, cls).__new__(cls)
@@ -164,7 +167,7 @@ def purge_old_rainfall():
       loop_dt = datetime.datetime.strptime(day, '%Y-%m-%d')
       elapsed = now - loop_dt
       duration_in_d = elapsed.days
-      if duration_in_d > args.get("max_days", default=180, type=int): # that is about 30,000 metrics (7*24*180)
+      if duration_in_d > args.get("max_days", default=int(configuration.max_days_telemetry_stored), type=int): # that is about 30,000 metrics (7*24*180)
          keys_to_remove.append(day)
          number_keys_to_remove += 1
 
@@ -185,7 +188,7 @@ def purge_old_metics():
       loop_dt = datetime.datetime.strptime(day, '%Y-%m-%d')
       elapsed = now - loop_dt
       duration_in_d = elapsed.days
-      if duration_in_d > args.get("max_days", default=200, type=int):
+      if duration_in_d > args.get("max_days", default=int(configuration.max_days_telemetry_stored), type=int):
          keys_to_remove.append(day)
          number_keys_to_remove += 1
 
