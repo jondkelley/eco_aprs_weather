@@ -24,7 +24,7 @@ config = configparser.ConfigParser()
 config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
-      self.status = config.get('General', 'status_message', allback='')
+      self.status = config.get('General', 'status_message', fallback='')
    def __new__(cls):
       if not hasattr(cls, 'instance'):
          cls.instance = super(Configuration, cls).__new__(cls)
