@@ -20,6 +20,15 @@ import configparser
 import calendar
 
 app = Flask(__name__)
+config = configparser.ConfigParser()
+config.read('/etc/bridge.ini')
+class Configuration(object):
+   def __init__(self):
+      self.status = config.get('General', 'status_message', allback='')
+   def __new__(cls):
+      if not hasattr(cls, 'instance'):
+         cls.instance = super(Configuration, cls).__new__(cls)
+      return cls.instance
 
 class TelemetrySingleton(object):
    """
@@ -52,7 +61,7 @@ class WeatherSingleton(object):
 
 singleton = TelemetrySingleton()
 wx = WeatherSingleton()
-
+configuration = Configuration()
 def calculate_24hour_rainfall():
    """
    calculates rainfall within the past 24 hours since ecowitt devices only transmit the "last day" metric
@@ -88,7 +97,7 @@ def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin
     #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
     fields.append("b%05d" % int(float(float(baromabsin) * 33.864 * float(10) + float(29)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
-    wxnow = date + ''.join(fields) + '\n'
+    wxnow = date + ''.join(fields) + f'{configuration.status}\n'
     return wxnow
 
 @app.route('/wxnow.txt', methods=['GET'])
@@ -107,7 +116,10 @@ def wxnow():
     try:
       return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
     except KeyError:
-      return abort(500, 'error: weather unavailable right now') 
+      date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
+      # TODO add a ECOWITT GATEWAY OFFLINE message if no recent telemetry is uploaded in 1 hour
+      wxnow = date + 'note: ecowitt weather bridge is running but no data from ecowitt gateway\n'
+      return wxnow
 
 @app.route('/data/metrics.json', methods=['GET'])
 @app.route('/data/metric.json', methods=['GET'])
