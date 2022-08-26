@@ -1,0 +1,4 @@
+include eco_aprs_weather/templates/*
+include eco_aprs_weather/static/images/*
+include eco_aprs_weather/static/css/*
+include eco_aprs_weather/static/js/*

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<style>
+	table {
+	  width: 100%;
+	  border: 1px solid #000;
+	}
+
+	th, td {
+	  width: 25%;
+	  text-align: left;
+	  vertical-align: top;
+	  border: 1px solid #000;
+	}
+</style>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{ the_title }}</title>
+
+	<!-- note the special href for files in the Flask "static" folder -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
+<div id="container">
+<center>
+	<h1>Sensor Data Overview</h1>
+</center>
+<b>Last report: 
+{% if 'dateutc' in weather %}   
+    {{ weather['dateutc'] }}
+{% else %}
+    Station Never Reported
+{% endif %}
+</b>
+
+  <!-- Jinja directives: page contents will go between them -->
+  {% block content %}
+
+<table>
+{% for key, value in weather.items() %}
+  <tr>
+    <td>{{key}}</td>
+    <td>{{value}}</td>
+  </tr>
+{% endfor %}
+</table>
+
+
+
+  {% endblock %}
+
+</div>
+
+</body>
+</html>
