@@ -69,9 +69,9 @@ Within your Ecowitt phone app:
 
 ### Advanced Software Configuration
 
-This software configuration file is located at `/etc/bridge.ini` and can be used to customize the WX bridge behavior.
+A custom configuration can be created at `/etc/bridge.ini` to alter the default behavior of this software.
 
-A sample config is below, with each setting explained in detail within the following sections.
+A full sample config is below, with each setting explained in detail within each of the following sections.
 
 ```
 [General]
