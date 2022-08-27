@@ -302,6 +302,10 @@ def weather_report():
     print(wx.hourlyrainfall)
     return 'OK; Telemetry Accepted'
 
+@app.route('/version', methods=['GET'])
+def version(metric):
+    return __version__
+
 @app.route('/', methods=['GET'])
 def about():
     """ read the last raw weather report out of memory """
