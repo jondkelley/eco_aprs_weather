@@ -73,6 +73,19 @@ temp_sensor=temp3f
 humidity_sensor=humidity3
 ```
 
+You will notice the name of the sensor corresponds with the ID typically screen on the bottom right of the probe LCD screen.
+
+For example:
+
+* `tempinf` or `humidityin` - the ecowitt gateway's probes
+* `tempf` or `humidity` - the outdoor probe that comes with many station units
+* `temp1f` or `humidity1` - WH32 probe ID 1
+* `temp2f` or `humidity2` - WH32 probe ID 2
+* `temp3f` or `humidity3` - WH32 probe ID 3
+* `temp4f` or `humidity4` - WH32 probe ID 4
+* `temp5f` or `humidity5` - WH32 probe ID 5
+* `temp6f` or `humidity6` - WH32 probe ID 6
+
 #### Custom Beacon Message
 
 The software doesn't send any beacon text by default; only WX telemtry. Customized beacon text is configured as follows:
