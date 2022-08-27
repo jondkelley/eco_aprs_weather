@@ -43,6 +43,12 @@ If these commands worked, install eco_aprs_weather with:
 sudo pip3 install eco_aprs_weather
 ````
 
+### Starting the `eco_aprs_weather` service
+
+```
+todo
+````
+
 ### Ecowitt WX Station Configuration
 
 Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your PC.
