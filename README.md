@@ -149,7 +149,7 @@ listen_port=8080
 
 #### Callsign
 
-This setting is **NOT neccessary** if your APRS software is already configured with a valid callsign. However, some APRS stations pefer to use a abstract tactical callsign/SSID, which is USA FCC Part 97 compliant if the station transmits their callsign in the APRS message packets every 10min. In those cases, it is best radio amateur practice to beacon a callsign with as many packets as possible (so everyone can convienently identify your station.)
+This setting is **NOT neccessary** if your APRS software is already configured with a valid callsign. However, some APRS stations pefer to use a abstract tactical callsign/SSID, which is USA FCC Part 97 compliant if the station transmits their callsign in the APRS message packets every 10min. In this cases, it would be best radio amateur practice to beacon a callsign with as many packets as possible (so everyone can convienently identify your station.)
 
 ```
 [General]
