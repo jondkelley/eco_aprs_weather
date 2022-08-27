@@ -158,7 +158,7 @@ PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weathe
 PBEACON sendto=0 delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://127.0.0.1:5000/wxnow.txt | tail -1"
 ```
 
-Having both `PBEACON` above statements will cause transmission on `radio port 0` and `IG` (igate), sending over local RF as well as APRS-IS. Local RF packets can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
+Having both the above `PBEACON` statements causes transmission on both `radio port 0` and `IG` (igate), sending over local RF as well as APRS-IS. Local RF packets can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
 
 
 #### Other APRS Software
