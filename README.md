@@ -16,13 +16,10 @@ Other models may be supported as long as the device settings can output customiz
 
 ### Software Requirements
 
-A computer with Python 3.2 or greater.
+* Python 3.2 or greater.
+* Memory: 1 GB minimum RAM suggested
 
-This software can be hosted on a Raspberry Pi alongside the Direwolf install. It is rather lightweight.
-
-* Memory: 2 GB minimum RAM suggested
-* CPU: Whatever works!
-
+This software works great on a Raspberry Pi along with the Direwolf Sofwarre TNC.
 
 ### Install Directions
 
