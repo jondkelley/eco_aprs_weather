@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     setup(
         name=NAME,
-        version=environ.get('APP_VERSION', '0.0.1'),
+        version=environ.get('APP_VERSION', '1.0.1'),
         author="N5IPT Jonathan Kelley",
         author_email="jonk@omg.lol",
         url="https://github.com/jondkelley/eco_aprs_weather",
