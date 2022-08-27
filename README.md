@@ -8,7 +8,7 @@ It works like thiis:
 
 You run this software usually inside (but can be outside of) your home network. This software sits around collecting weather metrics from your ECOWITT branded weather station. Periodically your APRS IGATE application can collect data from this bridge software in `wxnow.txt` format. The `wxnow.txt` format is used by popular APRS software to send radio weather telemetry packets. This software emits `wxnow.txt` directly over HTTP, and can be saved locally if required.
 
-Here's one possible architecture implementation of this software [the blue box(s)!]:
+Here's one possible architecture implementation of this software [the blue box(es)!]:
 
 ![the actual reference architecture diagram](https://github.com/jondkelley/eco_aprs_weather/blob/master/images/architecture.drawio.png)
 
