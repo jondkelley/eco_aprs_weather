@@ -30,7 +30,6 @@ This software can be installed by PIP
 todo
 ````
 
-
 ### Ecowitt WX Station Configuration
 
 Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your PC.
@@ -48,6 +47,40 @@ Within your Ecowitt phone app:
    * Click save.
 5. Hit `<` (top right) to return to previous screens
 6. WX station should start sending metrics to the bridge in the next few minutes!
+
+### Software Configuration
+
+This software configuration file is located at `/etc/bridge.ini` and can be used to customize the WX bridge behavior.
+
+A sample config is below, with each setting explained in detail within the following sections.
+
+```
+[General]
+status_message=N5IPT WX/digi/igate software:Direwolf hardware:RPi 1 [2011] + Ecowitt Weather GW1100B_V2.0.2
+
+[Sensor Mappings]
+temp_sensor=temp2f
+humidity_sensor=humidity2
+```
+
+#### Custom Temp/Humidity Sensor Mappings
+
+The software automatically uses the outdoor sensor that comes with Ecowitt Products. If this sensor is not suitable, you can buy additional WH31/WH32 sensors and configure this software to use them. You can use the sensor overview page at `http://<IP ADDRESS OF THIS SOFTWARE>:5000/sensor/overview` to discover the name of the probe and set them in the configuration file like this:
+
+```
+[Sensor Mappings]
+temp_sensor=temp3f
+humidity_sensor=humidity3
+```
+
+#### Custom APRS Status Message
+
+The software doesn't send any status by default; only WX telemtry. A customized beacon message can be configured as follows:
+
+```
+[General]
+status_message=this is a weather station
+```
 
 #### To confirm weather station telemtry is being recieved by the bridge
 
