@@ -4,7 +4,7 @@ The Eco_APRS_Weather bridge software exists to allow ECOWITT Weather Stations to
 
 Are you interested?
 
-### Supported Weather Station devices
+### Supported Weather Station Gateway Devices
 
 This software should work with ECOWITT Weather station gateways models like:
 
