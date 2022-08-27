@@ -303,7 +303,7 @@ def weather_report():
     return 'OK; Telemetry Accepted'
 
 @app.route('/version', methods=['GET'])
-def version(metric):
+def version():
     return __version__
 
 @app.route('/', methods=['GET'])

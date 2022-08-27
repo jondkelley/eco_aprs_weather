@@ -1,6 +1,6 @@
 FROM tiangolo/uwsgi-nginx:python3.8
 
-ENV APP_VERSION 0.1.21
+#ENV APP_VERSION 0.0.0
 ################## CONFIG VARIABLES ##################
 ENV LISTEN_PORT 5000
 
