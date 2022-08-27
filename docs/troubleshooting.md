@@ -16,3 +16,13 @@ Telemetry automatically shuts off, as there is no data to report.
 Stale data is still will still be available / displayed in local web dashboards.
 
 You can visit `http:/IP ADDRESS:5000/sensor/overview` to get a sense for when last reported data was sent.
+
+
+### What does beacon text "wx OFF AIR-software bridge ready but no WX report from ECOWITT gw received yet"
+
+This can happen if you recently started the `eco_aprs_weather` service when your APRS system requested `wxnow.txt`
+
+When this application starts up, it doesn't have anything to report until the regular checkin from your ECOWITT gateway.
+
+If this message persists beyond the ECOWITT configured *Upload Interval* further troubleshooting is required with the ECOWITT gateway device.
+
