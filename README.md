@@ -80,7 +80,7 @@ temp_sensor=temp2f
 humidity_sensor=humidity2
 ```
 
-*NOTE 1: A section, such as `[General]` should only be listed once. If you have duplicate section names, things may not work as expected.*
+*NOTE 1: All section names, for example `[General]` should only be listed once with associated settings underneath. If you have duplicate section names, things may not work as expected. Confusion may result.*
 
 #### Custom Sensor Mappings
 
