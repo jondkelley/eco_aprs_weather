@@ -307,6 +307,20 @@ def weather_report():
 def version():
     return __version__
 
+
+@app.route('/set/telemetry_message', methods=['GET'])
+def set_telem_message():
+    """will dynamically update the telemetry message broadcasted with wx beacon packet telemetry """
+    new_message = args.get("message", default=None, type=str)
+    if not new_message:
+      return 'error: must define `message` parameter in HTTP get request'
+    configuration.status = new_message
+
+    config['General']['telemetry_message'] = new_message
+    with open('/etc/bridge.ini', 'w') as configfile:    # save
+        config.write(configfile)
+    return 'update OK'
+
 @app.route('/', methods=['GET'])
 def about():
     """ read the last raw weather report out of memory """
