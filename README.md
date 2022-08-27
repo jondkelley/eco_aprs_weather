@@ -90,6 +90,11 @@ eco_aprs_weather --screen
 
 This will start the app in a screen session, afterwards you can now close the Terminal / CMD window.
 
+*Note: If this command does not run, you need to make sure you have the following apps installed:*
+
+* *screen*
+* *curl*
+
 ### Stopping the `eco_aprs_weather` service
 
 You can simply run
