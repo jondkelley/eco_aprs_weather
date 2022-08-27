@@ -122,6 +122,8 @@ You can simply run
 eco_aprs_weather --kill
 ````
 
+*NOTE: This is only known to work on Linux based environments, or Windows Subsystem for Linux.*
+
 ### Ecowitt App Configuration
 
 Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your PC.
