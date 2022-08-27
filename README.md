@@ -129,7 +129,7 @@ PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weathe
 
 *[Note1: Change 127.0.0.1 to match the IP address of your eco_aprs_weather bridge IP!]*
 
-*[Note2: If your running this software on the same Raspberry Pi with Direwolf, you need to change NOTHING.]*
+*[Note2: If your running this software on the same Raspberry Pi with Direwolf, you can leave 127.0.0.1 alone.]*
 
 This will send your weather reports straight the internet's APRS-IS backend service. It's what most people do. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would internet TX and TX over RF with a weather telemetry packet. These can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
 
