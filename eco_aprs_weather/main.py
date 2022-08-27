@@ -368,7 +368,7 @@ def index():
 def main():
     app.debug = False
     parser = argparse.ArgumentParser()
-    parser.add_argument('--version', dest='version', action='store_true', help=f'Display the app version ({__vesion__})')
+    parser.add_argument('--version', dest='version', action='store_true', help=f'Display the app version ({__version__})')
     args = parser.parse_args()
     if args.version:
       print(__version__)
