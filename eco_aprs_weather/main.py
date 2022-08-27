@@ -400,21 +400,21 @@ def main():
       subprocess.call(['pkill', '-9','eco_aprs_weath'])
       exit()
     if args.screen:
+      print(" ☕   It takes about 30 seconds to start...")
       if not os.path.exists(f'{home}/eco-aprs-weather-start.sh'):
         cmd = f'curl -s "https://raw.githubusercontent.com/jondkelley/eco_aprs_weather/master/scripts/eco-aprs-weather-start.sh" -o "{home}/eco-aprs-weather-start.sh"'
         subprocess.call(shlex.split(cmd))
         cmd = f'chmod 755 {home}/eco-aprs-weather-start.sh'
         subprocess.call(shlex.split(cmd))
-        print(" ☕   It takes about 30 seconds to start...")
         cmd = f'bash {home}/eco-aprs-weather-start.sh'
         subprocess.call(shlex.split(cmd))
       else:
-        print("   ☕   It takes about 30 seconds to start...")
         cmd = f'bash {home}/eco-aprs-weather-start.sh'
         subprocess.call(shlex.split(cmd))
-      print("\n   🌉   Ecowitt Bridge Software Activated")
+      print("\n   🌉   Ecowitt Bridge now ACTIVE")
       print("   screen -x   will attach to the Bridge webserver to view live logs")
       print("   you can type CTRL-D to detatch from the Bridge logs session at any time, or just close this terminal")
+      print("   it is now safe to close your terminal. :)")
       exit()
 
       
