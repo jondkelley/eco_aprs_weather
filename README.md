@@ -94,6 +94,7 @@ A full sample config is below, with each setting explained in detail within each
 ```
 [General]
 telemetry_message=N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
+listen_addr=0.0.0.0
 listen_port=5000
 callsign=N0CALL
 
@@ -138,6 +139,15 @@ The software doesn't send any beacon text by default; only WX telemtry. Customiz
 telemetry_message=custom beacon message that directly follows WX telemtry in the APRS packet
 ```
 
+#### Callsign
+
+This setting is **NOT neccessary** if your APRS software is already configured with a valid callsign. However, some APRS stations pefer to use a abstract tactical callsign/SSID, which is USA FCC Part 97 compliant if the station transmits their callsign in the APRS message packets every 10min. In this case, it is still best radio amateur practice to beacon a callsign with as many packets as possible (so everyone can convienently identify your station.)
+
+```
+[General]
+callsign=N0CALL
+```
+
 #### Listen Port
 
 This software listens on TCP port `5000` by default. If you have a requirement to change the port, it can be customized with
@@ -147,13 +157,16 @@ This software listens on TCP port `5000` by default. If you have a requirement t
 listen_port=8080
 ```
 
-#### Callsign
+#### Listen Address
 
-This setting is **NOT neccessary** if your APRS software is already configured with a valid callsign. However, some APRS stations pefer to use a abstract tactical callsign/SSID, which is USA FCC Part 97 compliant if the station transmits their callsign in the APRS message packets every 10min. In this case, it is still best radio amateur practice to beacon a callsign with as many packets as possible (so everyone can convienently identify your station.)
+The default is to listen on all Linux/UNIX interfaces (`0.0.0.0`)
 
+This is by far the most flexible configuration out of the box.
+
+This can be changed if you want to only listen on a specific network interface.
 ```
 [General]
-callsign=N0CALL
+listen_addr=0.0.0.0
 ```
 
 ### To confirm weather station telemtry is being recieved by the bridge

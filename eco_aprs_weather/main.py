@@ -26,6 +26,8 @@ class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'telemetry_message', fallback='')
       self.call = config.get('General', 'callsign', fallback='')
+      self.listen_port = int(config.get('General', 'listen_port', fallback=5000))
+      self.listen_addr = config.get('General', 'listen_port', fallback='0.0.0.0')
       self.stale_threshold = int(config.get('General', 'stale_data_shutdown_threshold_seconds', fallback=60))
       self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempinf')
       self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidityin')
@@ -358,8 +360,8 @@ def index():
     return render_template('sensor_overview.html', weather=singleton.weather, title="Sensor Overview")
 
 def main():
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host=configuration.listen_addr, port=configuration.listen_port)
 
 if __name__ == "__main__":
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host=configuration.listen_addr, port=configuration.listen_port)
