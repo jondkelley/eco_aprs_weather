@@ -73,7 +73,7 @@ temp_sensor=temp3f
 humidity_sensor=humidity3
 ```
 
-You will notice the name of the sensor corresponds with the ID typically screen on the bottom right of the probe LCD screen.
+You will notice the name of the sensor corresponds with the ID typically visible on the bottom right of the temp/humidity probe's LCD screen.
 
 For example (sensor ID's you might be interested for your WX packet):
 
