@@ -19,11 +19,10 @@ Other ECOWITT Gateway models may be supported as long as the device settings can
 
 This software supports:
 
-* ECOWITT WH40 Wireless Self-Emptying Rain Gauge Sensor
-* ECOWITT WS68 wireless solar powered anemometer
-* ECOWITT WS68 wireless solar powered anemometer
 * ECOWITT WH31 outdoor temperature&humidity sensor
 * ECOWITT WH32 outdoor temperature&humidity sensor
+* ECOWITT WH40 wireless self-emptying rain gauge sensor
+* ECOWITT WS68 wireless solar powered anemometer
 
 ### Software Requirements
 
