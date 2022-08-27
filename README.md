@@ -1,5 +1,28 @@
 # eco_aprs_weather
 
+- [eco_aprs_weather](#eco-aprs-weather)
+    + [Supported Weather Station Gateway Devices](#supported-weather-station-gateway-devices)
+    + [Supported Weather Station Probes](#supported-weather-station-probes)
+    + [Software Requirements](#software-requirements)
+    + [Install Directions](#install-directions)
+      - [Install for Debian/Ubuntu (deb) (For Amateurs)](#install-for-debian-ubuntu--deb---for-amateurs-)
+      - [Install for Redhat (rpm) (For Amateurs)](#install-for-redhat--rpm---for-amateurs-)
+      - [Install for FreeBSD (For Amateurs)](#install-for-freebsd--for-amateurs-)
+      - [Install for Mac OS X (For Amateurs)](#install-for-mac-os-x--for-amateurs-)
+      - [Simple Tarball Install (For Amateurs)](#simple-tarball-install--for-amateurs-)
+      - [Install Using Python / Pip (For Intermediates)](#install-using-python---pip--for-intermediates-)
+      - [Install Using Docker (For Experts Only)](#install-using-docker--for-experts-only-)
+    + [Starting the `eco_aprs_weather` service](#starting-the--eco-aprs-weather--service)
+    + [Stopping the `eco_aprs_weather` service](#stopping-the--eco-aprs-weather--service)
+    + [Ecowitt App Configuration](#ecowitt-app-configuration)
+    + [To confirm weather station telemtry is being recieved by the bridge](#to-confirm-weather-station-telemtry-is-being-recieved-by-the-bridge)
+    + [Configuring your APRS software to send WX [Weather] Beacons!](#configuring-your-aprs-software-to-send-wx--weather--beacons-)
+      - [Configuring Direwolf](#configuring-direwolf)
+      - [Other APRS Software](#other-aprs-software)
+- [Special Thanks To:](#special-thanks-to-)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 The `eco_aprs_weather` software is a bridge to allow ECOWITT Weather Stations to integrate with APRS weather telemetry for amateur radio. 
 
 This software integrates directly with ECOWITT GW brand weather stations.
