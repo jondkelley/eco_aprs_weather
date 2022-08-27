@@ -130,7 +130,7 @@ def wxnow():
         print(f'last report={duration_in_s} seconds ago')
         if duration_in_s >= configuration.stale_threshold:
             date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            wxnow = date + f'{callsign}WX is OFF AIR - No new metric data from ECOWITT gateway for over {configuration.stale_threshold}s\n'
+            wxnow = date + f'{callsign}WX station is OFF AIR - No new metric data from ECOWITT gateway for over {configuration.stale_threshold}s\n'
             return wxnow
     else:
         date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
