@@ -150,7 +150,15 @@ PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weathe
 
 *[Note2: If your running this software on the same Raspberry Pi with Direwolf, you can leave 127.0.0.1 alone.]*
 
-This will send your weather reports straight the internet's APRS-IS backend service. It's what most people do. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would internet TX and TX over RF with a weather telemetry packet. These can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
+This will send your weather reports straight the internet's APRS-IS backend service. It's what most people do. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf.
+
+This would look like:
+```
+PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://127.0.0.1:5000/wxnow.txt | tail -1"
+PBEACON sendto=0 delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://127.0.0.1:5000/wxnow.txt | tail -1"
+```
+
+Having both `PBEACON` above statements will cause transmission on `radio port 0` and `IG` (igate), sending over local RF as well as APRS-IS. Local RF packets can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
 
 
 #### Other APRS Software
