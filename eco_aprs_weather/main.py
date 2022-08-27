@@ -371,12 +371,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--version', dest='version', action='store_true', help=f'Display the app version ({__version__})')
     parser.add_argument('--kill', dest='kill', action='store_true', help=f'Kill running instances of this application')
+    parser.add_argument('--screen', dest='screen', action='store_true', help=f'Fork application into screen session backround service')
     args = parser.parse_args()
     if args.version:
       print(f'version={__version__}')
       exit()
     elif args.kill:
-      subprocess.call(["pkill", "-9","eco_aprs_weath"])
+      subprocess.call(['pkill', '-9','eco_aprs_weath'])
+    elif args.screen:
+      print('not available (yet)')
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
 
 if __name__ == "__main__":
