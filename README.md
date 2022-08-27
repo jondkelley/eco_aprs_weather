@@ -1,18 +1,29 @@
 # eco_aprs_weather
 
-The Eco_APRS_Weather bridge software exists to allow Ecowitt Weather Stations to work with APRS software for amateur radio. This software integrates directly with your Ecowitt brand weather station after changing the app settings. You basically run this software in your network, it sits and collects various metrics from you WX Station. Periodically your APRS software can collect data from this software in `wxnow.txt` format. The `wxnow.txt` format is used by popular APRS software to send radio weather telemetry packets.
+The Eco_APRS_Weather bridge software exists to allow ECOWITT Weather Stations to work with APRS software for amateur radio. This software integrates directly with your ECOWITT brand weather station after changing the app settings. You basically run this software in your network, it sits and collects various metrics from you WX Station. Periodically your APRS software can collect data from this software in `wxnow.txt` format. The `wxnow.txt` format is used by popular APRS software to send radio weather telemetry packets.
 
 Are you interested?
 
 ### Supported Weather Station devices
 
-This software should work with Ecowitt Weather station gateways models like:
+This software should work with ECOWITT Weather station gateways models like:
 
-* GW1004
-* GW1100
-* GW1102 
+* ECOWITT GW1004
+* ECOWITT GW1100
+* ECOWITT GW1102 
 
-Other models may be supported as long as the device settings can output customized HTTP in "Ecowitt" station format. See the *Ecowitt App Configuration* section for configuration details in the Ecowitt phone app!
+Other ECOWITT Gateway models may be supported as long as the device settings can output customized HTTP in "ECOWITT" station format. See the *Ecowitt App Configuration* section for configuration details in the ECOWITT phone app!
+
+
+### Supported Weather Station Probes
+
+This software supports:
+
+* ECOWITT WH40 Wireless Self-Emptying Rain Gauge Sensor
+* ECOWITT WS68 wireless solar powered anemometer
+* ECOWITT WS68 wireless solar powered anemometer
+* ECOWITT WH31 outdoor temperature&humidity sensor
+* ECOWITT WH32 outdoor temperature&humidity sensor
 
 ### Software Requirements
 
