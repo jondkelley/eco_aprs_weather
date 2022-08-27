@@ -75,7 +75,7 @@ humidity_sensor=humidity3
 
 You will notice the name of the sensor corresponds with the ID typically screen on the bottom right of the probe LCD screen.
 
-For example:
+For example (sensor ID's you might be interested in):
 
 * `tempinf` or `humidityin` - the ecowitt gateway's probes
 * `tempf` or `humidity` - the outdoor probe that comes with many station units
