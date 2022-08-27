@@ -412,7 +412,7 @@ def main():
         print("   ☕   It takes about 30 seconds to start...")
         cmd = f'bash {home}/eco-aprs-weather-start.sh'
         subprocess.call(shlex.split(cmd))
-      print("-------\n   🌉   Ecowitt Bridge Software Activated")
+      print("\n   🌉   Ecowitt Bridge Software Activated")
       print("   screen -x   will attach to the Bridge webserver to view live logs")
       print("   you can type CTRL-D to detatch from the Bridge logs session at any time, or just close this terminal")
       exit()
