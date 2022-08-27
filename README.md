@@ -12,7 +12,7 @@ This software should work with Ecowitt Weather station gateways models like:
 * GW1100
 * GW1102 
 
-Other models may be supported as long as the device settings can output customized HTTP in "Ecowitt" station format. See the *Ecowitt WX Station Configuration* section for configuration details in the Ecowitt phone app!
+Other models may be supported as long as the device settings can output customized HTTP in "Ecowitt" station format. See the *Ecowitt App Configuration* section for configuration details in the Ecowitt phone app!
 
 ### Software Requirements
 
@@ -49,7 +49,7 @@ sudo pip3 install eco_aprs_weather
 todo
 ````
 
-### Ecowitt WX Station Configuration
+### Ecowitt App Configuration
 
 Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your PC.
 The IP address will be used to point your weather station reports to it.
