@@ -6,13 +6,13 @@ Are you interested?
 
 ### Supported Weather Station devices
 
-This software is designed for Ecowitt Weather stations of the following models:
+This software should work with Ecowitt Weather station gateways models like:
 
 * GW1004
 * GW1100
 * GW1102 
 
-Other models may be supported as long as the device can output HTTP in "Ecowitt" station format. See the *Ecowitt WX Station Configuration* section for configuration details.
+Other models may be supported as long as the device settings can output customized HTTP in "Ecowitt" station format. See the *Ecowitt WX Station Configuration* section for configuration details in the Ecowitt phone app!
 
 ### Software Requirements
 
