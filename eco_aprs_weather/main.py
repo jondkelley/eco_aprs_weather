@@ -9,6 +9,8 @@ this is in very early stages of development but I plan to throw better documenta
 keep an eye on this igate for announcements when you can build your own!
 thanks to N5AMD to donating the hardware (Radio, Rasberry Pi 1 (rev 2011.12) for this project, without this the code would never have been written
 """
+from eco_aprs_weather import __version__
+import argparse
 from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort, jsonify
 import json
 import dateutil.parser
@@ -363,5 +365,13 @@ def main():
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--version', dest='version', action='store_true', help='Display current version')
+    args = parser.parse_args()
+    if args.version:
+      print(__version__)
+      exit()
+
+
     app.debug = True
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
