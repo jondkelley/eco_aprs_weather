@@ -24,7 +24,7 @@ config = configparser.ConfigParser()
 config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
-      self.status = config.get('General', 'status_message', fallback='')
+      self.status = config.get('General', 'telemetry_message', fallback='')
       self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempinf')
       self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidityin')
       self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
@@ -196,6 +196,7 @@ def purge_old_metics():
       del wx.metrics[key]
    return json.dumps({'number_days_purged': number_keys_to_remove, "days_purged": keys_to_remove})
 
+@app.route('//data/report/', methods=['GET'])
 @app.route('/data/report/', methods=['GET'])
 @app.route('/data/report', methods=['GET'])
 def weather_query():
