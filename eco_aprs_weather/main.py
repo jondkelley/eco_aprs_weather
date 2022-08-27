@@ -20,6 +20,7 @@ import time
 import datetime
 import configparser
 import calendar
+import subprocess
 
 app = Flask(__name__)
 config = configparser.ConfigParser()
@@ -369,10 +370,13 @@ def main():
     app.debug = False
     parser = argparse.ArgumentParser()
     parser.add_argument('--version', dest='version', action='store_true', help=f'Display the app version ({__version__})')
+    parser.add_argument('--kill', dest='kill', action='store_true', help=f'Kill running instances of this application')
     args = parser.parse_args()
     if args.version:
       print(f'version={__version__}')
       exit()
+    elif args.kill:
+      subprocess.call(["pkill", "-9","eco_aprs_weath"])
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
 
 if __name__ == "__main__":
