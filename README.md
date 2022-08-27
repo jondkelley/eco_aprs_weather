@@ -196,7 +196,7 @@ I don't know what other APRS software accepts `wxnow.txt` and can report telemet
 Here's a *PRO TIP* how you can save `wxnow.txt` to the disk of any popular Linux/UNIX based system (such as Raspberry Pi):
 
 ```
-echo "*/5 * * * * root curl -s http://127.0.0.1:5000/wxnow.txt | tail -1" >> /etc/crontab
+echo "*/5 * * * * root curl -s http://127.0.0.1:5000/wxnow.txt | tail -1" >> /wxnow.txt
 ```
 
 
