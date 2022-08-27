@@ -38,7 +38,7 @@ The IP address will be used to point your weather station reports to it.
 
 Within your Ecowitt phone app:
 
-1. Click the Elipsis (...) symbol in the top right
+1. Click the Elipsis (...) symbol in the top right (of the screen showing your WX station live metrics)
 2. In dropdown, select "Others"
 3. In the "Edit Gateway" screen click "DIY Upload Servers" button
 4. In the "DIY Upload Servers" screen click "Customized" (Globe Icon)
