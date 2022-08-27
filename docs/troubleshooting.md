@@ -11,9 +11,9 @@ I find FINDU to be helful, check this out:
 
 This means your station hasn't received data from your ECOWITT gateway in some time.
 
-Telemetry automatically shuts off, as there is no data to report.
+Telemetry automatically shuts off if there is no updates in 60 seconds.
 
-Stale data will still be shown in this apps local (LAN) web dashboards.
+Stale data will still be shown in this apps local (LAN) web dashboards, but not repoted to APRS network for accuracy.
 
 You can visit `http:/IP ADDRESS:5000/sensor/overview` to get a sense for when last reported data was sent.
 
