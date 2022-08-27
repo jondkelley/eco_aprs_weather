@@ -136,7 +136,7 @@ def wxnow():
             return wxnow
     else:
         date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-        wxnow = date + f'{callsign}note: ecowitt weather software bridge is online but nothing from ecowitt GW received\n'
+        wxnow = date + f'{callsign}wx OFF AIR-software bridge is ready but no data from ECOWITT gw\n'
         return wxnow
     return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
 
