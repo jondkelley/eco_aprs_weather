@@ -167,5 +167,5 @@ I don't know what other APRS software accepts `wxnow.txt` and can report telemet
 
 Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit by default unless you ask not to be mentioned in this README.
 
-If you know how to use Github and can make a [Pull Request](/pulls), even better!
+If you know how to use Github and can make a [Pull Request](https://github.com/jondkelley/eco_aprs_weather/pulls), even better!
 
