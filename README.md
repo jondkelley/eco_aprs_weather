@@ -134,7 +134,7 @@ This will send your weather reports straight the internet's APRS-IS backend serv
 
 I don't know what other APRS software accepts `wxnow.txt` and can report telemetry. That's where you come in!
 
-Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit unless you explicitly ask not to.
+Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit by default unless you ask not to be mentioned in this README.
 
 If you know how to use Github and can make a Pull Request, even better!
 
