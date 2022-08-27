@@ -8,7 +8,7 @@ It works like thiis:
 
 You run this software usually inside (but can be outside of) your home network. This software sits around collecting weather metrics from your ECOWITT branded weather station. Periodically your APRS IGATE application can collect data from this bridge software in `wxnow.txt` format. The `wxnow.txt` format is used by popular APRS software to send radio weather telemetry packets. This software emits `wxnow.txt` directly over HTTP, and can be saved locally if required.
 
-Here's one possible architecture implementation of this software [the blue box!]:
+Here's one possible architecture implementation of this software [the blue box(s)!]:
 
 ![the actual reference architecture diagram](https://github.com/jondkelley/eco_aprs_weather/blob/master/images/architecture.drawio.png)
 
@@ -194,6 +194,13 @@ Having both the above `PBEACON` statements causes transmission on both `radio po
 #### Other APRS Software
 
 I don't know what other APRS software accepts `wxnow.txt` and can report telemetry. That's where you come in! I need help, I don't know *everything* APRS.
+
+Here's a *PRO TIP* how you can save `wxnow.txt` to the disk of any popular Linux/UNIX based system (such as Raspberry Pi):
+
+```
+echo "*/5 * * * * root curl -s http://127.0.0.1:5000/wxnow.txt | tail -1" >> /etc/crontab
+```
+
 
 Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit by default unless you ask not to be mentioned in this README.
 
