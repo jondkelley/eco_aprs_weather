@@ -32,8 +32,8 @@ class Configuration(object):
       self.listen_port = int(config.get('General', 'listen_port', fallback=5000))
       self.listen_addr = config.get('General', 'listen_port', fallback='0.0.0.0')
       self.stale_threshold = int(config.get('General', 'stale_data_shutdown_threshold_seconds', fallback=60))
-      self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempinf')
-      self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidityin')
+      self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempf')
+      self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidity')
       self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
    def __new__(cls):
       if not hasattr(cls, 'instance'):
@@ -122,8 +122,8 @@ def wxnow():
     """
     callsign = f'{configuration.call} '
     probes = {
-        'temp_outdoor': 'temp2f',
-        'humidity_outdoor': 'humidity2'
+        'temp_outdoor': configuration.sensor_temp,
+        'humidity_outdoor': configuration.sensor_humidity
     }
 
     print(singleton.weather)
