@@ -129,3 +129,12 @@ PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weathe
 
 This will send your weather reports straight the internet's APRS-IS backend service. It's what most people do. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would internet TX and TX over RF with a weather telemetry packet. These can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
 
+
+##### Other APRS Software
+
+I don't know what other APRS software accepts `wxnow.txt` and can report telemetry. That's where you come in!
+
+Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit unless you explicitly ask not to.
+
+If you know how to use Github and can make a Pull Request, even better!
+
