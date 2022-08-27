@@ -67,7 +67,7 @@ A sample config is below, with each setting explained in detail within the follo
 
 ```
 [General]
-status_message=N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
+telemetry_message=N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
 
 [Sensor Mappings]
 temp_sensor=temp2f
@@ -97,13 +97,13 @@ For example (sensor ID's you might be interested in for your APRS WX report):
 * `temp5f` or `humidity5` - WH32 probe ID 5
 * `temp6f` or `humidity6` - WH32 probe ID 6
 
-#### Custom Beacon Message
+#### Custom Telemtry Message
 
 The software doesn't send any beacon text by default; only WX telemtry. Customized beacon text is configured as follows:
 
 ```
 [General]
-status_message=custom beacon message that directly follows WX telemtry in the APRS packet
+telemetry_message=custom beacon message that directly follows WX telemtry in the APRS packet
 ```
 
 #### To confirm weather station telemtry is being recieved by the bridge
