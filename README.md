@@ -163,7 +163,7 @@ Having both the above `PBEACON` statements causes transmission on both `radio po
 
 #### Other APRS Software
 
-I don't know what other APRS software accepts `wxnow.txt` and can report telemetry. That's where you come in!
+I don't know what other APRS software accepts `wxnow.txt` and can report telemetry. That's where you come in! I need help, I don't know *everything* APRS.
 
 Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit by default unless you ask not to be mentioned in this README.
 
