@@ -26,6 +26,7 @@ class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'telemetry_message', fallback='')
       self.call = config.get('General', 'callsign', fallback='')
+      self.stale_threshold = int(config.get('General', 'stale_data_shutdown_threshold_seconds', fallback=60))
       self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempinf')
       self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidityin')
       self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
@@ -120,15 +121,16 @@ def wxnow():
         'humidity_outdoor': 'humidity2'
     }
 
+    print(singleton.weather)
     if singleton.weather.get('dateutc'):
         total_rainfall = 0
         now = datetime.datetime.utcnow()
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
-        1_minute = 60
+        max_seconds_before_stale = 60
         duration_in_s = elapsed.total_seconds()
         print(f'last report={duration_in_s} seconds ago')
-        if duration_in_s <= 1_minute:
+        if duration_in_s <= max_seconds_before_stale:
             total_rainfall = total_rainfall + float(rainfall)
             date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
             wxnow = date + f'{callsign}Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
