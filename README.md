@@ -67,7 +67,7 @@ Within your Ecowitt phone app:
 5. Hit `<` (top right) to return to previous screens
 6. WX station should start sending metrics to the bridge in the next few minutes!
 
-### Software Configuration
+### Advanced Software Configuration
 
 This software configuration file is located at `/etc/bridge.ini` and can be used to customize the WX bridge behavior.
 
