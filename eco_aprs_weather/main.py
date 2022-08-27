@@ -130,7 +130,7 @@ def wxnow():
         max_seconds_before_stale = 60
         duration_in_s = elapsed.total_seconds()
         print(f'last report={duration_in_s} seconds ago')
-        if duration_in_s <= max_seconds_before_stale:
+        if duration_in_s >= max_seconds_before_stale:
             total_rainfall = total_rainfall + float(rainfall)
             date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
             wxnow = date + f'{callsign}Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
@@ -273,6 +273,7 @@ def update_hourlyrainfall_into_memory(post_dict):
 def weather_report():
     """ write WX report into memory from GW1004, GW1100B and similar devices """
     # example of what device sends: curl -d "PASSKEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&stationtype=GW1000B_V1.5.5&dateutc=2020-01-05+02:25:46&tempinf=73.9&humidityin=42&baromrelin=2humidity1=37&temp2f=46.58&humidity2=49&soilmoisture1=93&soilmoisture2=52&batt1=0&batt2=0&soilbatt1=1.8&soilbatt2=1.7&freq=915M&model=GW1000_Pro" localhost:5001/data/report
+    # example2 curl -d "PASSKEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&stationtype=GW1000B_V1.5.5&dateutc=2020-01-05+02:25:46&tempinf=73.9&humidityin=42&baromrelin=2humidity1=37&temp2f=46.58&humidity2=49&soilmoisture1=93&soilmoisture2=52&batt1=0&batt2=0&soilbatt1=1.8&soilbatt2=1.7&freq=915M&model=GW1000_Pro&hourlyrainin=33&winddir=3&windspeedmph=3&windgustmph=3&dailyrainin=3&baromabsin=3" 192.168.1.250:5000/data/report -XPOST
     if request.get_data().decode("utf-8") == '':
         print('/data/report recieved a zero payload input')
         return "Must send a POST payload", 400
