@@ -196,7 +196,6 @@ def purge_old_metics():
       del wx.metrics[key]
    return json.dumps({'number_days_purged': number_keys_to_remove, "days_purged": keys_to_remove})
 
-@app.route('//data/report/', methods=['GET'])
 @app.route('/data/report/', methods=['GET'])
 @app.route('/data/report', methods=['GET'])
 def weather_query():
@@ -251,7 +250,6 @@ def update_hourlyrainfall_into_memory(post_dict):
       except:
           wx.hourlyrainfall[utcday][utchour] = 0
 
-@app.route('//data/report/', methods=['POST'])
 @app.route('/data/report/', methods=['POST'])
 @app.route('/data/report', methods=['POST'])
 def weather_report():
