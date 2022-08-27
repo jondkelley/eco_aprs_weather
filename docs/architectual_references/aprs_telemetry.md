@@ -1,5 +1,7 @@
 Credit to: [PhirePhly](https://raw.githubusercontent.com/PhirePhly/aprs_notes/master/telemetry_format.md)
 
+Also cool: https://0x9900.com/aprs-telemetry/
+
 # APRS Telemetry
 
 The APRS telemetry packet looks like:

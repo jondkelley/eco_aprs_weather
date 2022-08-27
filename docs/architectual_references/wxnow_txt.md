@@ -1,7 +1,7 @@
 
-# Sample File
+# Example HTTP Format for Amateur Radio weather telemetry
 
-This is a simply text file containing two lines of data.
+A webserver http request should reply in plain text with two lines of data, with a return char seperating them
 
       Feb 01 2009 12:34
       272/010g006t069r010p030P020h61b10150
@@ -23,9 +23,3 @@ The second line is the wx report, in the format used in APRS "complete weather r
 * h61 - humidity 61% (00 = 100%)
 * b10150 - barometric pressure in tenths of a millibar - 1015.0 millibars
 
-
-## also sidenote
-
-https://0x9900.com/aprs-telemetry/
-
-## https://github.com/PhirePhly/aprs_notes/blob/master/telemetry_format.md
