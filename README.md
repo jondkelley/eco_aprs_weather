@@ -166,3 +166,9 @@ echo "*/5 * * * * root curl -s http://127.0.0.1:5000/wxnow.txt | tail -1" >> /et
 Contact me thru QRZ (N5IPT) and write up some instructions and I can post them here. You will recieve credit by default unless you ask not to be mentioned in this README.
 
 If you know how to use Github and can make a [Pull Request](https://github.com/jondkelley/eco_aprs_weather/pulls), even better!
+
+
+#### Special Thanks To:
+
+* Ben (N5AMD) for donating hardware, URI, Raspberry Pi 1 [2011], and a 2meter rig to prototype this software with.
+
