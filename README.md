@@ -42,9 +42,9 @@ Within your Ecowitt phone app:
 2. In dropdown, select "Others"
 3. In the "Edit Gateway" screen click "DIY Upload Servers" button
 4. In the "DIY Upload Servers" screen click "Customized" (Globe Icon)
-   * In the "Server / Host Name" field enter the IP address of the computer running this software
-   * In the "Port" field make sure it is "5000"
-   * In the "Upload Interval" field select the fastest interval
+   * In the `"Server / Host Name"` field enter the IP address of the computer running this software
+   * In the `"Port"` field make sure it is `"5000"`
+   * In the `"Upload Interval"` field select the fastest interval
    * Click save.
 5. Hit `<` (top right) to return to previous screens
 6. WX station should start sending metrics to the bridge in the next few minutes!
