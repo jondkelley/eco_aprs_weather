@@ -129,9 +129,7 @@ def wxnow():
     }
     
     if singleton.weather.get('dateutc'):
-        #now = datetime.datetime.utcnow()
-        tz = pytz.timezone(setting.timezone)
-        now = tz.localize(datetime.datetime.now(), is_dst=None)
+        now = datetime.datetime.utcnow()
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
         duration_in_s = elapsed.total_seconds()
