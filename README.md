@@ -12,7 +12,7 @@ This software should work with ECOWITT Weather station gateways models like:
 * ECOWITT GW1100
 * ECOWITT GW1102 
 
-Other ECOWITT Gateway models may be supported as long as the device settings can output customized HTTP in "ECOWITT" station format. See the *Ecowitt App Configuration* section for configuration details in the ECOWITT phone app!
+Other ECOWITT Gateway models may be supported as long as your ECOWITT device settings can output to a customized HTTP server in "ECOWITT" station format. See the *Ecowitt App Configuration* section for configuration details in the ECOWITT phone app!
 
 
 ### Supported Weather Station Probes
