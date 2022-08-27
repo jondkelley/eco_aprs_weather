@@ -102,6 +102,8 @@ For example (sensor ID's you might be interested in for your APRS WX report):
 * `temp5f` or `humidity5` - WH32 probe ID 5
 * `temp6f` or `humidity6` - WH32 probe ID 6
 
+Use the sensor overview page to identify the probe if you're having difficulty, and correlate with temp/humidify on the LCD screen for a reference value.
+
 #### Custom Telemtry Message
 
 The software doesn't send any beacon text by default; only WX telemtry. Customized beacon text is configured as follows:
