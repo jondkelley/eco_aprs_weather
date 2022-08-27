@@ -56,7 +56,7 @@ A sample config is below, with each setting explained in detail within the follo
 
 ```
 [General]
-status_message=N5IPT WX/digi/igate software:Direwolf hardware:RPi 1 [2011] + Ecowitt Weather GW1100B_V2.0.2
+status_message=N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
 
 [Sensor Mappings]
 temp_sensor=temp2f
@@ -73,13 +73,13 @@ temp_sensor=temp3f
 humidity_sensor=humidity3
 ```
 
-#### Custom APRS Status Message
+#### Custom Beacon Message
 
-The software doesn't send any status by default; only WX telemtry. A customized beacon message can be configured as follows:
+The software doesn't send any beacon text by default; only WX telemtry. Customized beacon text is configured as follows:
 
 ```
 [General]
-status_message=this is a weather station
+status_message=custom beacon message that directly follows WX telemtry in the APRS packet
 ```
 
 #### To confirm weather station telemtry is being recieved by the bridge
