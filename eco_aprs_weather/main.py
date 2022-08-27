@@ -123,7 +123,6 @@ def wxnow():
 
     print(singleton.weather)
     if singleton.weather.get('dateutc'):
-        total_rainfall = 0
         now = datetime.datetime.utcnow()
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
@@ -131,7 +130,6 @@ def wxnow():
         duration_in_s = elapsed.total_seconds()
         print(f'last report={duration_in_s} seconds ago')
         if duration_in_s >= max_seconds_before_stale:
-            total_rainfall = total_rainfall + float(rainfall)
             date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
             wxnow = date + f'{callsign}Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
             return wxnow
