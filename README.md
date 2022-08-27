@@ -115,17 +115,19 @@ This is the tricky part. This bridge supports any APRS software that accepts `wx
 
 My only experience is with [Direwolf](https://github.com/wb2osz/direwolf), the modern software replacement for the old 1980's style TNC.
 
-##### Configuring Direwolf to transmit weather packets
+##### Configuring Direwolf
 
 First thing, get your Direwolf tested and working with normal `PBEACON` config statements to verify things are up and running. That's beyond the scope of this README.
 
-Once Direwolf is confirmed working, you can comment out your old `PBEACON` with a `#` chaacter, and try a beacon like this:
+Once Direwolf is confirmed working, you can comment out your old `PBEACON` with a `#` chaacter, and try a *weather telemtry beacon* like this:
 
 ```
-PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://192.168.1.250:5000/wxnow.txt | tail -1"
+PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://127.0.0.1:5000/wxnow.txt | tail -1"
 ```
 
-*[Note: Change 192.168.1.250 to match the IP address of your eco_aprs_weather bridge IP!]*
+*[Note0: Be sure to change the `lat` `long` fields to match your physical coordinates!]*
+*[Note1: Change 127.0.0.1 to match the IP address of your eco_aprs_weather bridge IP!]*
+*[Note2: If your running this software on the same Raspberry Pi with Direwolf, you need to change NOTHING.]*
 
 This will send your weather reports straight the internet's APRS-IS backend service. It's what most people do. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would internet TX and TX over RF with a weather telemetry packet. These can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
 
