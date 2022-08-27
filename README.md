@@ -75,9 +75,9 @@ humidity_sensor=humidity3
 
 You will notice the name of the sensor corresponds with the ID typically visible on the bottom right of the temp/humidity probe's LCD screen.
 
-For example (sensor ID's you might be interested for your WX packet):
+For example (sensor ID's you might be interested in for your APRS WX report):
 
-* `tempinf` or `humidityin` - the ecowitt gateway's probes
+* `tempinf` or `humidityin` - the ecowitt gateway's probe "on that dangling wire"
 * `tempf` or `humidity` - the outdoor probe that comes with many station units
 * `temp1f` or `humidity1` - WH32 probe ID 1
 * `temp2f` or `humidity2` - WH32 probe ID 2
