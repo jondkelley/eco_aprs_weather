@@ -311,6 +311,7 @@ def version():
 @app.route('/set/telemetry_message', methods=['GET'])
 def set_telem_message():
     """will dynamically update the telemetry message broadcasted with wx beacon packet telemetry """
+    args = request.args
     new_message = args.get("message", default=None, type=str)
     if not new_message:
       return 'error: must define `message` parameter in HTTP get request'
