@@ -22,6 +22,14 @@
     + [Configuring your APRS software to send WX [Weather] Beacons!](#configuring-your-aprs-software-to-send-wx--weather--beacons-)
       - [Configuring Direwolf](#configuring-direwolf)
       - [Other APRS Software](#other-aprs-software)
+    + Supplemental Documentation
+      - [Config File Options](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/configuration.md)
+      - [Troubleshooting Help](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/troubleshooting.md)
+      - [Web/API Route Descriptions](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/webapi_spec.md)
+    + Architectural References
+      - [wxnow.txt system format](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/wxnow_txt.md)
+      - [APRS Compressed Telemtry](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/aprs_compressed_telemetry.txt)
+      - [APRS Telemetry](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/aprs_telemetry.md)
 - [Special Thanks To:](#special-thanks-to-)
 
 
