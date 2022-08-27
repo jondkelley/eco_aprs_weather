@@ -114,7 +114,7 @@ The software doesn't send any beacon text by default; only WX telemtry. Customiz
 telemetry_message=custom beacon message that directly follows WX telemtry in the APRS packet
 ```
 
-#### To confirm weather station telemtry is being recieved by the bridge
+### To confirm weather station telemtry is being recieved by the bridge
 
 Visit `http://<IP ADDRESS OF THIS SOFTWARE>:5000/sensor/overview` and verify you have station data coming in.
 
@@ -128,13 +128,13 @@ If you do not see station data, possible solutions involve:
 * Verifying your network configuration and trying again
 
 
-#### Configuring your APRS software to send WX [Weather] Beacons!
+### Configuring your APRS software to send WX [Weather] Beacons!
 
 This is the tricky part. This bridge supports any APRS software that accepts `wxnow.txt` weather format in Cumulus weather format.
 
 My only experience is with [Direwolf](https://github.com/wb2osz/direwolf), the modern software replacement for the old 1980's style TNC.
 
-##### Configuring Direwolf
+#### Configuring Direwolf
 
 First thing, get your Direwolf tested and working with normal `PBEACON` config statements to verify things are up and running. That's beyond the scope of this README.
 
@@ -153,7 +153,7 @@ PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weathe
 This will send your weather reports straight the internet's APRS-IS backend service. It's what most people do. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would internet TX and TX over RF with a weather telemetry packet. These can be received by APRS/WX-aware radios like Kenwood's or maybe some Yaesu's.
 
 
-##### Other APRS Software
+#### Other APRS Software
 
 I don't know what other APRS software accepts `wxnow.txt` and can report telemetry. That's where you come in!
 
