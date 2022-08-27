@@ -25,6 +25,7 @@ config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'telemetry_message', fallback='')
+      self.call = config.get('General', 'callsign', fallback='')
       self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempinf')
       self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidityin')
       self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
@@ -83,6 +84,7 @@ def calculate_24hour_rainfall():
    return total_rainfall
 
 def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin):
+    callsign = f'{configuration.call} '
     dt = datetime.datetime.utcnow()
     fields = []
     fields.append("%03d" % int(winddir)) # wind dir
@@ -100,7 +102,7 @@ def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin
     #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
     fields.append("b%05d" % int(float(float(baromabsin) * 33.864 * float(10) + float(29)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
-    wxnow = date + ''.join(fields) + f'{configuration.status}\n'
+    wxnow = date + ''.join(fields) + f'{callsign}{configuration.status}\n'
     return wxnow
 
 @app.route('/wxnow.txt', methods=['GET'])
@@ -112,6 +114,7 @@ def wxnow():
         PBEACON sendto=IG delay=0:10 every=5 lat=1.000000 long=-1.000000 SYMBOL="weather station" COMMENTCMD="curl -s http://192.168.1.250:5000/wxnow.txt | tail -1"
     to igate your WX data every 5 minutes
     """
+    callsign = f'{configuration.call} '
     probes = {
         'temp_outdoor': 'temp2f',
         'humidity_outdoor': 'humidity2'
@@ -122,16 +125,17 @@ def wxnow():
         now = datetime.datetime.utcnow()
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
-        seconds_in_5min = 60 * 5
+        1_minute = 60
         duration_in_s = elapsed.total_seconds()
-        if duration_in_s <= seconds_in_5min:
+        print(f'last report={duration_in_s} seconds ago')
+        if duration_in_s <= 1_minute:
             total_rainfall = total_rainfall + float(rainfall)
             date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            wxnow = date + 'Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
+            wxnow = date + f'{callsign}Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
             return wxnow
     else:
         date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-        wxnow = date + 'note: ecowitt weather software bridge is online but nothing from ecowitt GW received\n'
+        wxnow = date + f'{callsign}note: ecowitt weather software bridge is online but nothing from ecowitt GW received\n'
         return wxnow
     return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
 
