@@ -168,7 +168,7 @@ Contact me thru QRZ (N5IPT) and write up some instructions and I can post them h
 If you know how to use Github and can make a [Pull Request](https://github.com/jondkelley/eco_aprs_weather/pulls), even better!
 
 
-#### Special Thanks To:
+# Special Thanks To:
 
 * Ben (N5AMD) for donating hardware, URI, Raspberry Pi 1 [2011], and a 2meter rig to prototype this software with.
 
