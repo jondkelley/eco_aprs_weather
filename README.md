@@ -29,3 +29,36 @@ This software can be installed by PIP
 ```
 todo
 ````
+
+
+### Ecowitt WX Station Configuration
+
+Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your PC.
+The IP address will be used to point your weather station reports to it.
+
+Within your Ecowitt phone app:
+
+# Click the Elipsis (...) symbol in the top right
+# In dropdown, select "Others"
+# In the "Edit Gateway" screen click "DIY Upload Servers" button
+# In the "DIY Upload Servers" screen click "Customized" (Globe Icon)
+# In the "Server / Host Name" field enter the IP address of the computer running this software
+# In the "Port" field make sure it is "5000"
+# In the "Upload Interval" field select the fastest interval
+# Click save.
+# Hit < (top right) to return to previous screens
+# WX configuration Done!
+
+
+#### To confirm weather station telemtry is being recieved by the bridge
+
+Visit `http://<IP ADDRESS OF THIS SOFTWARE>:5000/sensor/overview` and verify you have station data coming in.
+
+You may have to wait 5-10 minutes and refresh this page periodically, sometimes it takes a while for Ecowitt device settings to take effect.
+
+If you do not see station data, possible solutions involve:
+
+* Check the Ecowitt WX Station configuration settings
+* Ensure the path field says exactly "data/report"
+* Ensure the computer running this software does not have any sort of Firewall enabled
+* Verifying your network configuration and trying again
