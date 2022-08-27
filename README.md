@@ -161,9 +161,7 @@ listen_port=8080
 
 The default is to listen on all Linux/UNIX interfaces (`0.0.0.0`)
 
-This is by far the most flexible configuration out of the box.
-
-This can be changed if you want to only listen on a specific network interface.
+If you want to only listen on a specific network interface, you can alter this below:
 ```
 [General]
 listen_addr=0.0.0.0
