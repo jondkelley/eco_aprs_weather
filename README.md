@@ -73,6 +73,7 @@ A full sample config is below, with each setting explained in detail within each
 ```
 [General]
 telemetry_message=N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
+listen_port=5000
 
 [Sensor Mappings]
 temp_sensor=temp2f
@@ -113,6 +114,15 @@ The software doesn't send any beacon text by default; only WX telemtry. Customiz
 telemetry_message=custom beacon message that directly follows WX telemtry in the APRS packet
 ```
 
+#### Listen Port
+
+This software listens on TCP port `5000` by default. If you have a requirement to change the port, it can be customized with
+
+```
+[General]
+listen_port=8080
+```
+
 ### To confirm weather station telemtry is being recieved by the bridge
 
 Visit `http://<IP ADDRESS OF THIS SOFTWARE>:5000/sensor/overview` and verify you have station data coming in.
@@ -122,7 +132,7 @@ You may have to wait 5-10 minutes and refresh this page periodically, sometimes 
 If you do not see station data, possible solutions involve:
 
 * Check the Ecowitt WX Station configuration settings
-* Ensure the path field says exactly "data/report"
+* Ensure the path field says exactly "data/report", other values don't work.
 * Ensure the computer running this software does not have any sort of Firewall enabled
 * Verifying your network configuration and trying again
 
