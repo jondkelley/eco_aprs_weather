@@ -80,6 +80,8 @@ temp_sensor=temp2f
 humidity_sensor=humidity2
 ```
 
+*NOTE 1: A section, such as `[General]` should only be listed once. If you have duplicate section names, things may not work as expected.*
+
 #### Custom Sensor Mappings
 
 The software automatically uses the outdoor **temp/humidity** sensor that comes with Ecowitt Products. If this sensor is not suitable, you can buy additional WH31/WH32 sensors and configure this software to use them. You can use the sensor overview page at `http://<IP ADDRESS OF THIS SOFTWARE>:5000/sensor/overview` to discover the name of the probe and set them in the configuration file like this:
