@@ -131,10 +131,10 @@ export PATH=/usr/local/bin:$PATH
 #Log the start of the script run and re-run
 date >> $LOGFILE
 
-# First wait a little while in case we just rebooted
+# First wait a tiny while in case we just rebooted
 # and the desktop hasn't started up yet.
 #
-sleep 30
+sleep 15
 
 
 #
