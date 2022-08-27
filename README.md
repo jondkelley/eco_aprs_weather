@@ -1,6 +1,6 @@
 # eco_aprs_weather
 
-The Eco_APRS_Weather software exists to allow Ecowitt Weather Stations to work with APRS software for amateur radio. This software integrates directly with your weather station after changing some settings, and can integrate directly with software like Direwolf using the `wxnow.txt` amateur radio weather telemetry format.
+The Eco_APRS_Weather bridge software exists to allow Ecowitt Weather Stations to work with APRS software for amateur radio. This software integrates directly with your weather station after changing some settings, and can integrate directly with software like Direwolf using the `wxnow.txt` amateur radio weather telemetry format.
 
 ### Supported Weather Station devices
 
@@ -38,7 +38,7 @@ The IP address will be used to point your weather station reports to it.
 
 Within your Ecowitt phone app:
 
-1. Click the Elipsis (...) symbol in the top right (of the screen showing your WX station live metrics)
+1. Click the elipsis (`...`) symbol in the top right (of the screen showing your WX station live metrics)
 2. In dropdown, select "Others"
 3. In the "Edit Gateway" screen click "DIY Upload Servers" button
 4. In the "DIY Upload Servers" screen click "Customized" (Globe Icon)
@@ -46,9 +46,8 @@ Within your Ecowitt phone app:
    * In the "Port" field make sure it is "5000"
    * In the "Upload Interval" field select the fastest interval
    * Click save.
-5. Hit < (top right) to return to previous screens
-6. WX configuration Done!
-
+5. Hit `<` (top right) to return to previous screens
+6. WX station should start sending metrics to the bridge in the next few minutes!
 
 #### To confirm weather station telemtry is being recieved by the bridge
 
