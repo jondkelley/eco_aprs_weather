@@ -115,7 +115,7 @@ This is the tricky part. This bridge supports any APRS software that accepts `wx
 
 My only experience is with [Direwolf](https://github.com/wb2osz/direwolf), the modern software replacement for the old 1980's style TNC.
 
-##### Direwolf WX Becon Primer
+##### Configuring Direwolf to transmit weather packets
 
 First thing, get your Direwolf tested and working with normal `PBEACON` config statements to verify things are up and running. That's beyond the scope of this README.
 
