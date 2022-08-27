@@ -371,7 +371,7 @@ def main():
     parser.add_argument('--version', dest='version', action='store_true', help=f'Display the app version ({__version__})')
     args = parser.parse_args()
     if args.version:
-      print(__version__)
+      print(f'version={__version__}')
       exit()
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
 
