@@ -1,6 +1,8 @@
 # eco_aprs_weather
 
-The Eco_APRS_Weather bridge software exists to allow Ecowitt Weather Stations to work with APRS software for amateur radio. This software integrates directly with your Ecowitt brand weather station after changing the app settings. You can run this software, it will sit and collect metrics from you WX Station, and periodically your APRS software can collect this data in `wxnow.txt` to beacon in amateur radio weather telemetry format.
+The Eco_APRS_Weather bridge software exists to allow Ecowitt Weather Stations to work with APRS software for amateur radio. This software integrates directly with your Ecowitt brand weather station after changing the app settings. You basically run this software in your network, it sits and collects various metrics from you WX Station. Periodically your APRS software can collect data from this software in `wxnow.txt` format. The `wxnow.txt` format is used by popular APRS software to send radio weather telemetry packets.
+
+Are you interested?
 
 ### Supported Weather Station devices
 
