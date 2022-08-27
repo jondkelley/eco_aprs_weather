@@ -193,6 +193,8 @@ If you do not see station data, possible solutions involve:
 * Ensure the computer running this software does not have any sort of Firewall enabled
 * Verifying your network configuration and trying again
 
+![overview pic](https://raw.githubusercontent.com/jondkelley/eco_aprs_weather/master/images/sensor_overview.png)
+
 
 ### Configuring your APRS software to send WX [Weather] Beacons!
 
