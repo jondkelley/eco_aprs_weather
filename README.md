@@ -24,10 +24,21 @@ This software can be hosted on a Raspberry Pi alongside the Direwolf install. It
 
 ### Install Directions
 
-This software can be installed by PIP
+#### Using Python / Pip
+
+This software can be installed by Python Pip.
+
+Make sure you have python and pip installed by running:
 
 ```
-todo
+python3 --version
+pip3 --version
+```
+
+If you're missing these, you'll need to install python, and python-pip.
+If these commands worked, install eco_aprs_weather with:
+```
+sudo pip3 install eco_aprs_weather
 ````
 
 ### Ecowitt WX Station Configuration
