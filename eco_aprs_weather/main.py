@@ -251,6 +251,7 @@ def update_hourlyrainfall_into_memory(post_dict):
       except:
           wx.hourlyrainfall[utcday][utchour] = 0
 
+@app.route('//data/report/', methods=['POST'])
 @app.route('/data/report/', methods=['POST'])
 @app.route('/data/report', methods=['POST'])
 def weather_report():
