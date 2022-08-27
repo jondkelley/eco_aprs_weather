@@ -28,6 +28,8 @@ config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'telemetry_message', fallback='')
+      if not config.get('General', 'disable_telemetry_message_footer', fallback=False): 
+        self.status = self.status + ' {ECOWITT}'
       self.timezone = config.get('General', 'timezone', fallback='UTC')
       self.call = config.get('General', 'callsign', fallback='')
       self.listen_port = int(config.get('General', 'listen_port', fallback=5000))
