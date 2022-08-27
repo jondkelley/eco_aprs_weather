@@ -33,7 +33,7 @@ BRIDGE_BIN="eco_aprs_weather"
 #    Print audio statistics each 100 seconds for troubleshooting.
 #    Change this command to however you wish to start eco_aprs_weather
 
-DWCMD="$BRIDGE_BIN"
+BRCMD="$BRIDGE_BIN"
 
 
 #Where will logs go - needs to be writable by non-root users
@@ -60,7 +60,7 @@ function CLI {
    # Screen commands
    #  -d m :: starts the command in detached mode
    #  -S   :: name the session
-   $SCREEN -d -m -S eco_aprs_weather $DWCMD >> $LOGFILE
+   $SCREEN -d -m -S eco_aprs_weather $BRCMD >> $LOGFILE
    SUCCESS=1
 
    $SCREEN -list eco_aprs_weather
@@ -103,13 +103,13 @@ function GUI {
    #
 
    if [ -x /usr/bin/lxterminal ]; then
-      /usr/bin/lxterminal -t "eco_aprs_weather" -e "$DWCMD" &
+      /usr/bin/lxterminal -t "eco_aprs_weather" -e "$BRCMD" &
       SUCCESS=1
      elif [ -x /usr/bin/xterm ]; then
-      /usr/bin/xterm -bg white -fg black -e "$DWCMD" &
+      /usr/bin/xterm -bg white -fg black -e "$BRCMD" &
       SUCCESS=1
      elif [ -x /usr/bin/x-terminal-emulator ]; then
-      /usr/bin/x-terminal-emulator -e "$DWCMD" &
+      /usr/bin/x-terminal-emulator -e "$BRCMD" &
       SUCCESS=1
      else
       echo "Did not find an X terminal emulator.  Reverting to CLI mode"
