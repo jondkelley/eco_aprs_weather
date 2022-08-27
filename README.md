@@ -10,7 +10,7 @@ This software is designed for Ecowitt Weather stations of the following models:
 * GW1100
 * GW1102 
 
-Other models may be supported as long as the device can output HTTP in "Ecowitt" station format. See the *Ecowitt Setup* section for details.
+Other models may be supported as long as the device can output HTTP in "Ecowitt" station format. See the *Ecowitt WX Station Configuration* section for configuration details.
 
 ### Software Requirements
 
