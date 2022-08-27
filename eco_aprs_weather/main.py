@@ -385,7 +385,7 @@ def metrics(metric):
 pairs_list = []
 @app.route('/sensor/overview')
 def index():
-    tz = pytz.timezone(setting.timezone)
+    tz = pytz.timezone(configuration.timezone)
     localnow = tz.localize(datetime.datetime.now(), is_dst=None)
     return render_template('sensor_overview.html', localnow=localnow, timezone=tz, weather=singleton.weather, title="Sensor Overview")
 
