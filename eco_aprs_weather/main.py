@@ -313,13 +313,16 @@ def set_telem_message():
     """will dynamically update the telemetry message broadcasted with wx beacon packet telemetry """
     args = request.args
     new_message = args.get("message", default=None, type=str)
+    no_flush = args.get("no_flush", default=None, type=str)
     if not new_message:
       return 'error: must define `message` parameter in HTTP get request'
     configuration.status = new_message
 
     config['General']['telemetry_message'] = new_message
-    with open('/etc/bridge.ini', 'w') as configfile:    # save
-        config.write(configfile)
+    if not no_flush:
+      # UNLESS no flush is defined in request, flush the config to disk too!
+      with open('/etc/bridge.ini', 'w') as configfile:    # save
+          config.write(configfile)
     return 'update OK'
 
 @app.route('/', methods=['GET'])
