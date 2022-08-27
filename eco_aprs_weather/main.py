@@ -126,12 +126,11 @@ def wxnow():
         now = datetime.datetime.utcnow()
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
-        max_seconds_before_stale = 60
         duration_in_s = elapsed.total_seconds()
         print(f'last report={duration_in_s} seconds ago')
-        if duration_in_s >= max_seconds_before_stale:
+        if duration_in_s >= configuration.stale_threshold:
             date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            wxnow = date + f'{callsign}Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
+            wxnow = date + f'{callsign}Weather Metrics temporarily OFF AIR - No metrics for over {configuration.stale_threshold} seconds received from ECOWITT!\n'
             return wxnow
     else:
         date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
