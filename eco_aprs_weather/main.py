@@ -366,16 +366,14 @@ def index():
     return render_template('sensor_overview.html', weather=singleton.weather, title="Sensor Overview")
 
 def main():
-    app.run(host=configuration.listen_addr, port=configuration.listen_port)
-
-if __name__ == "__main__":
+    app.debug = False
     parser = argparse.ArgumentParser()
     parser.add_argument('--version', dest='version', action='store_true', help='Display current version')
     args = parser.parse_args()
     if args.version:
       print(__version__)
       exit()
-
-
-    app.debug = True
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
+
+if __name__ == "__main__":
+    main()
