@@ -126,8 +126,8 @@ eco_aprs_weather --kill
 
 ### Ecowitt App Configuration
 
-Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your PC.
-The IP address will be used to point your weather station reports to it.
+Once you have the service started for `Eco_APRS_Weather` you need to determine the IP address of your device running `eco_aprs_weather`.
+The IP of this device is used to point your weather station reports to it.
 
 Within your Ecowitt phone app:
 
