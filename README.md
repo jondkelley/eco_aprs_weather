@@ -83,8 +83,18 @@ sudo pip3 install eco_aprs_weather
 
 ### Starting the `eco_aprs_weather` service
 
+You can simply run
 ```
-todo
+eco_aprs_weather --screen
+````
+
+This will start the app in a screen session, afterwards you can now close the Terminal / CMD window.
+
+### Stopping the `eco_aprs_weather` service
+
+You can simply run
+```
+eco_aprs_weather --kill
 ````
 
 ### Ecowitt App Configuration
