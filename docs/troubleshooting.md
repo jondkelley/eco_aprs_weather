@@ -17,6 +17,7 @@ Stale data will still be shown in this apps local (LAN) web dashboards.
 
 You can visit `http:/IP ADDRESS:5000/sensor/overview` to get a sense for when last reported data was sent.
 
+You might want to make sure ECOWITT gw is powered on and working normally.
 
 ### What does beacon text "wx OFF AIR-software bridge ready but no WX report from ECOWITT gw received yet" mean?
 
