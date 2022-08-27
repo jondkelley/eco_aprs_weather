@@ -27,8 +27,8 @@ config = configparser.ConfigParser()
 config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
-      self.status = config.get('General', 'telemetry_message', fallback='UTC')
-      self.timezone = config.get('General', 'timezone', fallback='')
+      self.status = config.get('General', 'telemetry_message', fallback='')
+      self.timezone = config.get('General', 'timezone', fallback='UTC')
       self.call = config.get('General', 'callsign', fallback='')
       self.listen_port = int(config.get('General', 'listen_port', fallback=5000))
       self.listen_addr = config.get('General', 'listen_port', fallback='0.0.0.0')
