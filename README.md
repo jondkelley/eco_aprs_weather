@@ -148,3 +148,19 @@ Contact me thru QRZ (N5IPT) and write up some instructions and I can post them h
 
 If you know how to use Github and can make a [Pull Request](https://github.com/jondkelley/eco_aprs_weather/pulls), even better!
 
+#### Building & Running via Docker
+
+If you want to experiment with Docker continers, this project is a good introduction!
+
+Simply install Docker Desktop (Win/Mac/Linux), then run:
+
+```
+docker run  -p 127.0.0.1:5000:5000/tcp jondkelley/eco_aprs_weather:latest
+```
+
+You should be able to visit `http://localhost:5000` to see the application!
+
+If you want to do local software development, you can rebuild by using:
+```
+docker build . -t jondkelley/eco_aprs_weather
+```

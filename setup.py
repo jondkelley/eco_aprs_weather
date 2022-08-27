@@ -19,7 +19,7 @@ if __name__ == "__main__":
         include_package_data=True,
         package_dir={NAME: NAME},
         description="eco_aprs_weather - Python based HTTP bridge to DireWolf to beacon WX packets",
-        install_requires=['redis==3.3.11', 'multidict==4.7.6', 'chardet==3.0.4', 'diskcache', 'Eve', 'cachetools', 'okta', 'Authlib', 'requests'],
+        install_requires=['python-dateutil', 'Flask==2.1.2'],
         entry_points={
             'console_scripts': ['eco_aprs_weather = eco_aprs_weather.main:main'],
         },
