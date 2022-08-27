@@ -54,14 +54,14 @@ First, get [Docker Desktop](https://www.docker.com/products/docker-desktop/) ins
 
 Then you can run the application with:
 ```
-docker run  -p 127.0.0.1:5000:5000/tcp jondkelley/eco_aprs_weather:latest
+docker run  -p 0.0.0.0:5000:5000/tcp jondkelley/eco_aprs_weather:latest
 ```
 
 You should be able to visit `http://localhost:5000` to see the application!
 
 If you want to do local software development, you can rebuild by using:
 ```
-docker build . -t jondkelley/eco_aprs_weather
+docker build . -t jondkelley/eco_aprs_weather:latest
 ```
 
 #### Using Python / Pip
