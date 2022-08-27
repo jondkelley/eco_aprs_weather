@@ -116,13 +116,25 @@ def wxnow():
         'temp_outdoor': 'temp2f',
         'humidity_outdoor': 'humidity2'
     }
-    try:
-      return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
-    except KeyError:
-      date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-      # TODO add a ECOWITT GATEWAY OFFLINE message if no recent telemetry is uploaded in 1 hour
-      wxnow = date + 'note: ecowitt weather bridge is running but no data from ecowitt gateway\n'
-      return wxnow
+
+    if singleton.weather.get('dateutc'):
+        total_rainfall = 0
+        now = datetime.datetime.utcnow()
+        loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
+        elapsed = now - loop_dt
+        seconds_in_5min = 60 * 5
+        duration_in_s = elapsed.total_seconds()
+        if duration_in_s <= seconds_in_5min:
+            total_rainfall = total_rainfall + float(rainfall)
+            date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
+            wxnow = date + 'Weather Metrics temporarily OFF AIR - No metrics for over 5 minutes received from ECOWITT!\n'
+            return wxnow
+    else:
+        date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
+        wxnow = date + 'note: ecowitt weather software bridge is online but nothing from ecowitt GW received\n'
+        return wxnow
+    return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
+
 
 @app.route('/data/metrics.json', methods=['GET'])
 @app.route('/data/metric.json', methods=['GET'])
