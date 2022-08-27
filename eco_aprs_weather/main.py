@@ -386,7 +386,8 @@ pairs_list = []
 @app.route('/sensor/overview')
 def index():
     tz = pytz.timezone(configuration.timezone)
-    localnow = tz.localize(datetime.datetime.now(), is_dst=None).strftime("%Y-%m-%d+%H:%M:%S")
+    now = datetime.datetime.now()
+    localnow = now.astimezone(tz).strftime("%Y-%m-%d+%H:%M:%S")
     return render_template('sensor_overview.html', localnow=localnow, timezone=tz, weather=singleton.weather, title="Sensor Overview")
 
 def main():
