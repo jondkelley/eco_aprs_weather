@@ -107,3 +107,23 @@ If you do not see station data, possible solutions involve:
 * Ensure the path field says exactly "data/report"
 * Ensure the computer running this software does not have any sort of Firewall enabled
 * Verifying your network configuration and trying again
+
+
+#### Configuring your APRS software to send WX [Weather] Beacons!
+
+This is the tricky part. This bridge supports any APRS software that accepts `wxnow.txt` weather format in Cumulus weather format.
+
+My only experience is with [Direwolf](https://github.com/wb2osz/direwolf), the modern software replacement for the old 1980's style TNC.
+
+##### Direwolf WX Becon Primer
+
+First thing, get your Direwolf tested and working with normal `PBEACON` config statements to verify things are up and running. That's beyond the scope of this README.
+
+Once Direwolf is confirmed working, you can comment out your old `PBEACON` with a `#` chaacter, and try a beacon like this:
+
+```
+PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://192.168.1.250:5000/wxnow.txt | tail -1"
+```
+
+This will send your weather reports straight the IGATE. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would IGATE and broadcast your weather over RF.
+
