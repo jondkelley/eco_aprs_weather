@@ -30,7 +30,7 @@
 </center>
 <b>Last report: 
 {% if 'dateutc' in weather %}   
-    {{ weather['dateutc'] }} (UTC time)
+    {{ weather['dateutc'] }} (UTC time) {{ localnow }} ({{ timezone }})
 {% else %}
     Station Never Reported
 {% endif %}

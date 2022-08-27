@@ -17,7 +17,7 @@ import dateutil.parser
 import hashlib
 import os
 import time
-import datetime
+import datetime, pytz
 import configparser
 import calendar
 import subprocess, shlex
@@ -27,7 +27,8 @@ config = configparser.ConfigParser()
 config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
-      self.status = config.get('General', 'telemetry_message', fallback='')
+      self.status = config.get('General', 'telemetry_message', fallback='UTC')
+      self.timezone = config.get('General', 'timezone', fallback='')
       self.call = config.get('General', 'callsign', fallback='')
       self.listen_port = int(config.get('General', 'listen_port', fallback=5000))
       self.listen_addr = config.get('General', 'listen_port', fallback='0.0.0.0')
@@ -91,6 +92,7 @@ def calculate_24hour_rainfall():
 
 def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin):
     callsign = f'{configuration.call} '
+
     dt = datetime.datetime.utcnow()
     fields = []
     fields.append("%03d" % int(winddir)) # wind dir
@@ -125,10 +127,11 @@ def wxnow():
         'temp_outdoor': configuration.sensor_temp,
         'humidity_outdoor': configuration.sensor_humidity
     }
-
-    print(singleton.weather)
+    
     if singleton.weather.get('dateutc'):
-        now = datetime.datetime.utcnow()
+        #now = datetime.datetime.utcnow()
+        tz = pytz.timezone(setting.timezone)
+        now = tz.localize(datetime.datetime.now(), is_dst=None)
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
         duration_in_s = elapsed.total_seconds()
@@ -382,7 +385,9 @@ def metrics(metric):
 pairs_list = []
 @app.route('/sensor/overview')
 def index():
-    return render_template('sensor_overview.html', weather=singleton.weather, title="Sensor Overview")
+    tz = pytz.timezone(setting.timezone)
+    localnow = tz.localize(datetime.datetime.now(), is_dst=None)
+    return render_template('sensor_overview.html', localnow=localnow, timezone=tz, weather=singleton.weather, title="Sensor Overview")
 
 def main():
     home = os.path.expanduser("~")
