@@ -125,5 +125,7 @@ Once Direwolf is confirmed working, you can comment out your old `PBEACON` with 
 PBEACON sendto=IG delay=0:30 every=13 lat=1.303690 long=-1.628359 SYMBOL="weather station" COMMENTCMD="curl -s http://192.168.1.250:5000/wxnow.txt | tail -1"
 ```
 
+*[Note: Change 192.168.1.250 to match the IP address of your eco_aprs_weather bridge IP!]*
+
 This will send your weather reports straight the IGATE. You can add an additional `PBEACON` line and change `sendto=IG` to `sendto=0` to send to the first radio channel in direwolf. This would IGATE and broadcast your weather over RF.
 
