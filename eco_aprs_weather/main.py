@@ -376,10 +376,11 @@ def main():
     if args.version:
       print(f'version={__version__}')
       exit()
-    elif args.kill:
+    if args.kill:
       subprocess.call(['pkill', '-9','eco_aprs_weath'])
-    elif args.screen:
+    if args.screen:
       print('not available (yet)')
+      exit()
     app.run(host=configuration.listen_addr, port=configuration.listen_port)
 
 if __name__ == "__main__":
