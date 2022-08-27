@@ -12,6 +12,8 @@ Here's one possible architecture implementation of this software [the blue box(e
 
 ![the actual reference architecture diagram](https://github.com/jondkelley/eco_aprs_weather/blob/master/images/architecture.drawio.png)
 
+*Above: You would buy ECOWITT gateway + sensors [not shown in diagram], setup the components in white, and setup this software in the blue box.*
+
 ### Supported Weather Station Gateway Devices
 
 This software should work with ECOWITT Weather station gateways models like:
