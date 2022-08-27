@@ -21,8 +21,6 @@
       - [Other APRS Software](#other-aprs-software)
 - [Special Thanks To:](#special-thanks-to-)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 The `eco_aprs_weather` software is a bridge to allow ECOWITT Weather Stations to integrate with APRS weather telemetry for amateur radio. 
 
 This software integrates directly with ECOWITT GW brand weather stations.
