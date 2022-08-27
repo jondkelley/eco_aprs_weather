@@ -372,6 +372,7 @@ def main():
     parser.add_argument('--version', dest='version', action='store_true', help=f'Display the app version ({__version__})')
     parser.add_argument('--kill', dest='kill', action='store_true', help=f'Kill running instances of this application')
     parser.add_argument('--screen', dest='screen', action='store_true', help=f'Fork application into screen session backround service')
+    parser.add_argument('--initialsetup', dest='initialsetup', action='store_true', help=f'Run this once after installing')
     args = parser.parse_args()
     if args.version:
       print(f'version={__version__}')
