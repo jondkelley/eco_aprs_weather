@@ -8,14 +8,15 @@ A full sample config is below, with each setting explained in detail within each
 
 ```
 [General]
-telemetry_message=N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
-listen_addr=0.0.0.0
-listen_port=5000
-callsign=N0CALL
+timezone = US/Eastern
+telemetry_message = N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
+listen_addr = 0.0.0.0
+listen_port = 5000
+callsign = N0CALL
 
 [Sensor Mappings]
-temp_sensor=temp2f
-humidity_sensor=humidity2
+temp_sensor = temp2f
+humidity_sensor = humidity2
 ```
 
 *NOTE 1: All section names, for example `[General]` should only be listed once with associated settings underneath. If you have duplicate section names, things may not work as expected. Confusion may result.*
@@ -26,8 +27,8 @@ The software automatically uses the outdoor **temp/humidity** sensor that comes 
 
 ```
 [Sensor Mappings]
-temp_sensor=temp3f
-humidity_sensor=humidity3
+temp_sensor = temp3f
+humidity_sensor = humidity3
 ```
 
 You will notice the name of the sensor corresponds with the ID typically visible on the bottom right of the temp/humidity probe's LCD screen.
@@ -45,13 +46,24 @@ For example (sensor ID's you might be interested in for your APRS WX report):
 
 Use the sensor overview page to identify the probe if you're having difficulty, and correlate with temp/humidify on the LCD screen for a reference value.
 
+#### Timezone
+
+The software actually operates in UTC for most things, but if you want to see your timezone in dashboards, etc you can set it here:
+
+```
+[General]
+tmezone = US/Hawaii
+```
+
+You can find a list of available timezones in `docs/timezones.txt`
+
 #### Custom Telemtry Message
 
 The software doesn't send any beacon text by default; only WX telemtry. Customized beacon text is configured as follows:
 
 ```
 [General]
-telemetry_message=custom beacon message that directly follows WX telemtry in the APRS packet
+telemetry_message = custom beacon message that directly follows WX telemtry in the APRS packet
 ```
 
 #### Callsign
@@ -60,7 +72,7 @@ This setting is **NOT neccessary** if your APRS software is already configured w
 
 ```
 [General]
-callsign=N0CALL
+callsign = N0CALL
 ```
 
 #### Listen Port
@@ -69,7 +81,7 @@ This software listens on TCP port `5000` by default. If you have a requirement t
 
 ```
 [General]
-listen_port=8080
+listen_port = 8080
 ```
 
 #### Listen Address
@@ -79,5 +91,5 @@ The default is to listen on all Linux/UNIX interfaces (`0.0.0.0`)
 If you want to only listen on a specific network interface, you can alter this below:
 ```
 [General]
-listen_addr=0.0.0.0
+listen_addr = 0.0.0.0
 ```
