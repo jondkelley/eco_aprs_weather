@@ -93,7 +93,9 @@ telemetry_message = custom beacon message that directly follows WX telemtry in t
 
 #### Callsign
 
-This setting is **NOT neccessary** if your APRS software is already configured with a valid callsign. However, some APRS stations pefer to use a abstract tactical callsign/SSID, which is USA FCC Part 97 compliant if the station transmits their callsign in the APRS message packets every 10min. In this case, it is still best radio amateur practice to beacon a callsign with as many packets as possible (so everyone can convienently identify your station.)
+This setting is **NOT neccessary** if your APRS software is transmitting with your assigned CALLSIGN. However, a few APRS stations use abstract tactical callsign/SSID for isolation, which can reach USA FCC Part 97 compliance if a station transmits callsign in the APRS message packets.
+
+This option will append your callsign at the end of every station telemtry packet.
 
 ```
 [General]
