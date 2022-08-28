@@ -35,11 +35,15 @@
 
 ### About
 
-The `eco_aprs_weather` software is a bridge to allow ECOWITT Weather Stations to integrate with APRS weather telemetry for amateur radio. 
+Hi I'm N5IPT, or Jon.
 
-This software integrates directly with ECOWITT GW brand weather stations.
+The `eco_aprs_weather` software is a bridge to allow for the ~$120 [ECOWITT Weather Stations](https://amzn.to/3CItgFH) so that it can output APRS weather onto terrestrial telemetry for amateur radio. It does this via generating `wxnow.txt`. 
 
-Here is a possible architecture implementation of this software [the blue box(es)!]:
+A lot of software only takes this stuff from igate, or from wunderground to APRS-IS. This tries to bridge the gap. It' a bridge!
+
+If you want a project you can do in a weekend with full weather on APRS try the ~$120 [ECOWITT Weather Stations](https://amzn.to/3CItgFH) gateway and this software can bridge the gap.
+
+Here is 1 possible architecture implementation of this software [the blue box(es)!]:
 
 #### Architecture Diagram
 
