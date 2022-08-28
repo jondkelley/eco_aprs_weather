@@ -1,4 +1,16 @@
-The software is written to just work out of the box, but you can get more with custom configuration.
+
+The software is written to just work out of the box. By that, it pumps out metrics!
+
+You can squeeze more juice out of the box with custom configuration explained below.
+
+- [Custom Configuration](#custom-configuration)
+  * [Custom Sensor Mappings](#custom-sensor-mappings)
+  * [Timezone](#timezone)
+  * [Barometer Choice](#barometer-choice)
+  * [Custom Telemtry Message](#custom-telemtry-message)
+  * [Callsign](#callsign)
+  * [Listen Port](#listen-port)
+  * [Listen Address](#listen-address)
 
 ### Custom Configuration
 
