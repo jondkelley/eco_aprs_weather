@@ -13,6 +13,7 @@ telemetry_message = N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
 listen_addr = 0.0.0.0
 listen_port = 5000
 callsign = N0CALL
+barometer = absolute
 
 [Sensor Mappings]
 temp_sensor = temp2f
