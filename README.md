@@ -50,9 +50,9 @@ This software sits collecting weather metrics from your ECOWITT branded weather 
 
 This software should work with ECOWITT Weather station gateways models like:
 
-* ECOWITT GW1004
-* ECOWITT GW1100
-* ECOWITT GW1102 
+* [ECOWITT GW1004](https://amzn.to/3Aqu0wl)
+* [ECOWITT GW1100](https://amzn.to/3Kz9zSA)
+* [ECOWITT GW1102](https://amzn.to/3ArbLXr)
 
 Other ECOWITT Gateway models may be supported as long as your ECOWITT device settings can output to a customized HTTP server in "ECOWITT" station format. See the *Ecowitt App Configuration* section for configuration details in the ECOWITT phone app (which works for the models above)!
 
