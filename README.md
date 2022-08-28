@@ -1,18 +1,15 @@
 # eco_aprs_weather
 
-- [eco_aprs_weather](#eco-aprs-weather)
     + [About](#about)
       - [Architecture Diagram](#architecture-diagram)
     + [Supported Devices](#supported-devices)
       - [Supported Weather Station Gateway Devices](#supported-weather-station-gateway-devices)
       - [Supported Weather Station Probes](#supported-weather-station-probes)
-    + [Software Requirements](#software-requirements)
+    + [System Requirements](#system-requirements)
     + [Install Directions](#install-directions)
       - [Install for Debian/Ubuntu (deb) (For Amateurs)](#install-for-debian-ubuntu--deb---for-amateurs-)
       - [Install for Redhat (rpm) (For Amateurs)](#install-for-redhat--rpm---for-amateurs-)
-      - [Install for FreeBSD (For Amateurs)](#install-for-freebsd--for-amateurs-)
-      - [Install for Mac OS X (For Amateurs)](#install-for-mac-os-x--for-amateurs-)
-      - [Simple Tarball Install (For Amateurs)](#simple-tarball-install--for-amateurs-)
+      - [SNAP Package (For Amateurs)](#snap-package--for-amateurs-)
       - [Install Using Python / Pip (For Intermediates)](#install-using-python---pip--for-intermediates-)
       - [Install Using Docker (For Experts Only)](#install-using-docker--for-experts-only-)
     + [Starting the `eco_aprs_weather` service](#starting-the--eco-aprs-weather--service)
@@ -22,16 +19,7 @@
     + [Configuring your APRS software to send WX [Weather] Beacons!](#configuring-your-aprs-software-to-send-wx--weather--beacons-)
       - [Configuring Direwolf](#configuring-direwolf)
       - [Other APRS Software](#other-aprs-software)
-    + Supplemental Documentation
-      - [Config File Options](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/configuration.md)
-      - [Troubleshooting Help](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/troubleshooting.md)
-      - [Web/API Route Descriptions](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/webapi_spec.md)
-    + Architectural References
-      - [wxnow.txt system format](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/wxnow_txt.md)
-      - [APRS Compressed Telemtry](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/aprs_compressed_telemetry.txt)
-      - [APRS Telemetry](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/aprs_telemetry.md)
-- [Special Thanks To:](#special-thanks-to-)
-
+- [Special Thanks To](#special-thanks-to)
 
 ### About
 
@@ -74,12 +62,12 @@ Other ECOWITT Gateway models may be supported as long as your ECOWITT device set
 
 This software supports:
 
-* ECOWITT WH31 outdoor temperature&humidity sensor
-* ECOWITT WH32 outdoor temperature&humidity sensor
-* ECOWITT WH40 wireless self-emptying rain gauge sensor
-* ECOWITT WS68 wireless solar powered anemometer
+* ECOWITT [WH31 outdoor temperature&humidity sensor](https://amzn.to/3KtSUj7)
+* ECOWITT [WH32 outdoor temperature&humidity sensor](https://amzn.to/3Kq3I1I)
+* ECOWITT [WH40 wireless self-emptying rain gauge sensor](https://amzn.to/3RfKbmP)
+* ECOWITT [WS68 wireless solar powered anemometer](https://amzn.to/3Cz1Fqh)
 
-### Software Requirements
+### System Requirements
 
 * Python 3.2 or greater.
 * Memory: 1 GB minimum RAM suggested
