@@ -50,7 +50,7 @@ Here is 1 possible architecture implementation of this software [the blue box(es
 
 ![the actual reference architecture diagram](https://github.com/jondkelley/eco_aprs_weather/blob/master/images/architecture.drawio.png)
 
-*Above: You would buy [ECOWITT Weather Gateway](https://amzn.to/3CItgFH) gateway + sensors [not shown in diagram], setup the block diagram components in white, and finally setup this software in the blue block diagam. The diagram depicts running on Raspberry Pi, but this software can run on an old PC, on Docker, or up in a cloud server; this software should work with many deployment methods.*
+*Above: You would buy [ECOWITT Weather Gateway](https://amzn.to/3CItgFH) + sensors [not shown in diagram], setup the block diagram components in white, and finally setup this software in the blue block diagam. The diagram depicts running on Raspberry Pi, but this software can run on an old PC, on Docker, or up in a cloud server; this software should work with many deployment methods.*
 
 The architecture described in "layman's terms":
 
