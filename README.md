@@ -86,7 +86,7 @@ This software works great on a Raspberry Pi along with the Direwolf Sofwarre TNC
 #### Install for Debian/Ubuntu (deb) (For Amateurs)
 
 ```
-dpkg -i https://github.com/jondkelley/eco_aprs_weather/releases/download/v1.0.1/python3-eco-aprs-weather_1.0.1_all.deb
+deb=$(curl -w "%{filename_effective}" -LO https://github.com/jondkelley/eco_aprs_weather/releases/download/v1.0.1/python3-eco-aprs-weather_1.0.1_all.deb) && dpkg -i $deb && rm $deb && unset deb
 ```
 
 #### Install for Redhat (rpm) (For Amateurs)
