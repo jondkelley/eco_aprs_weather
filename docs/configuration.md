@@ -57,6 +57,18 @@ tmezone = US/Hawaii
 
 You can find a list of available timezones in `docs/timezones.txt`
 
+#### Barometer Choice
+
+Ecowitt GW has two barometer metrics, relative and absolute. The default is `absolute`.
+
+To override this, define this setting:
+```
+[General]
+barometer = relative
+```
+
+**NOTE: `relative` and `absolute` are the only valid inputs here**
+
 #### Custom Telemtry Message
 
 The software doesn't send any beacon text by default; only WX telemtry. Customized beacon text is configured as follows:

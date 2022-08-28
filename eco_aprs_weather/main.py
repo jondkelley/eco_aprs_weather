@@ -28,6 +28,7 @@ config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'telemetry_message', fallback='')
+      self.barometer = config.get('General', 'barometer', fallback='absolute')
       if not config.get('General', 'disable_telemetry_message_footer', fallback=False) and self.status != '': 
         self.status = self.status + ' {ECOWITT}'
       self.timezone = config.get('General', 'timezone', fallback='UTC')
@@ -92,9 +93,15 @@ def calculate_24hour_rainfall():
             total_rainfall = total_rainfall + float(rainfall)
    return total_rainfall
 
-def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin):
+def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin,baromrelin):
     callsign = f'{configuration.call} '
-
+    if configuration.barometer == 'absolute':
+        barometer = baromabsin
+    elif configuration.barometer == 'relative':
+        barometer = baromrelin
+    else:
+        raise("Configuration error section General, key barometer Error! value must be only `absolute` or `relative`")
+        exit()
     dt = datetime.datetime.utcnow()
     fields = []
     fields.append("%03d" % int(winddir)) # wind dir
@@ -110,7 +117,7 @@ def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin
     #fields.append("h%03d" % int(singleton.weather[probes['humidity_outdoor']]))
     fields.append("h%03d" % (int(humidity_outdoor) + int(2)))
     #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
-    fields.append("b%05d" % int(float(float(baromabsin) * 33.864 * float(10) + float(29)))) # barometer
+    fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10) + float(29)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
     wxnow = date + ''.join(fields) + f'{callsign}{configuration.status}\n'
     return wxnow
@@ -144,7 +151,7 @@ def wxnow():
         date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
         wxnow = date + f'{callsign}wx OFF AIR-software bridge ready but no WX report from ECOWITT gw received yet\n'
         return wxnow
-    return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'])
+    return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'],baromrelin=singleton.weather['baromrelin'])
 
 
 @app.route('/data/metrics.json', methods=['GET'])
