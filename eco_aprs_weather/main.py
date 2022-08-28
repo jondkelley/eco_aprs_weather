@@ -107,17 +107,15 @@ def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin
     fields.append("%03d" % int(winddir)) # wind dir
     fields.append("/%03d" % int(float(windspeedmph))) # wind speed
     fields.append("g%03d" % int(float(windgustmph))) # gust
-    #fields.append("t%03d" % int(float(singleton.weather[probes['temp_outdoor']])))
     fields.append("t%03d" % int(float(temp_outdoor)))
     fields.append("r%03d" % int(float(hourlyrainin) * 100)) # hour rain
     fields.append("p%03d" % int(calculate_24hour_rainfall() * 100)) # rain 24
     fields.append("P%03d" % int(float(dailyrainin)* 100)) # day rain
     if int(humidity_outdoor) < 0 or 100 <= int(humidity_outdoor):
         humidity_outdoor = 0
-    #fields.append("h%03d" % int(singleton.weather[probes['humidity_outdoor']]))
-    fields.append("h%03d" % (int(humidity_outdoor) + int(2)))
+    fields.append("h%03d" % (int(humidity_outdoor)))
     #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
-    fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10) + float(29)))) # barometer
+    fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
     wxnow = date + ''.join(fields) + f'{callsign}{configuration.status}\n'
     return wxnow
