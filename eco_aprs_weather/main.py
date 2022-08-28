@@ -28,7 +28,6 @@ config.read('/etc/bridge.ini')
 class Configuration(object):
    def __init__(self):
       self.status = config.get('General', 'telemetry_message', fallback='')
-      self.barometer = config.get('General', 'barometer', fallback='absolute')
       if not config.get('General', 'disable_telemetry_message_footer', fallback=False) and self.status != '': 
         self.status = self.status + ' {ECOWITT}'
       self.timezone = config.get('General', 'timezone', fallback='UTC')
@@ -38,6 +37,7 @@ class Configuration(object):
       self.stale_threshold = int(config.get('General', 'stale_data_shutdown_threshold_seconds', fallback=60))
       self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempf')
       self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidity')
+      self.barometer = config.get('Sensor Mappings', 'barometer', fallback='absolute')
       self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
    def __new__(cls):
       if not hasattr(cls, 'instance'):

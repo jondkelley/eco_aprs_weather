@@ -25,11 +25,11 @@ telemetry_message = N5IPT WX/digi/igate running Ecowitt Weather GW1100B_V2.0.2
 listen_addr = 0.0.0.0
 listen_port = 5000
 callsign = N0CALL
-barometer = absolute
 
 [Sensor Mappings]
 temp_sensor = temp2f
 humidity_sensor = humidity2
+barometer = absolute
 ```
 
 *NOTE 1: All section names, for example `[General]` should only be listed once with associated settings underneath. If you have duplicate section names, things may not work as expected. Confusion may result.*
@@ -76,7 +76,7 @@ Ecowitt GW has two barometer metrics, relative and absolute. The default is `abs
 
 To override this, define this setting:
 ```
-[General]
+[Sensor Mappings]
 barometer = relative
 ```
 
