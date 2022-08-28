@@ -85,23 +85,22 @@ This software works great on a Raspberry Pi along with the Direwolf Sofwarre TNC
 
 #### Install for Debian/Ubuntu (deb) (For Amateurs)
 
-tba [to be announced]
+```
+dpkg -i https://github.com/jondkelley/eco_aprs_weather/releases/download/v1.0.1/python3-eco-aprs-weather_1.0.1_all.deb
+```
 
 #### Install for Redhat (rpm) (For Amateurs)
 
-tba [to be announced]
+```
+yum install -y https://github.com/jondkelley/eco_aprs_weather/releases/download/v1.0.1/python3-eco_aprs_weather-1.0.1-1.noarch.rpm
+```
 
-#### Install for FreeBSD (For Amateurs)
+#### SNAP Package (For Amateurs)
 
-tba [to be announced]
-
-#### Install for Mac OS X (For Amateurs)
-
-tba [to be announced]
-
-#### Simple Tarball Install (For Amateurs)
-
-tba [to be announced]
+URL:
+```
+https://github.com/jondkelley/eco_aprs_weather/releases/download/v1.0.1/python3-eco_aprs_weather_1.0.1_all.snap
+```
 
 #### Install Using Python / Pip (For Intermediates)
 
@@ -117,9 +116,16 @@ pip3 --version
 If you're missing these, you'll need to install python, and python-pip.
 If these commands worked, install eco_aprs_weather with:
 ```
-sudo pip3 install eco_aprs_weather
+sudo pip3 install eco-aprs-weather
 ````
 
+If you pull this repository from github down local, you can alternatively install with
+
+```
+sudo pip3 install .
+```
+
+but this is for developers mostly.
 
 #### Install Using Docker (For Experts Only)
 
