@@ -23,6 +23,10 @@
 
 ### About
 
+* ⚡️ Lightning fast to setup, requires zero config out of the box [in many cases]
+* 🐍 Installable via pip
+* 🤝 Python 3.10 compatibility
+
 Hi I'm N5IPT, or Jon.
 
 The `eco_aprs_weather` software is a bridge to allow for the ~$120 [ECOWITT Weather Stations](https://amzn.to/3CItgFH) so that it can output APRS weather onto terrestrial telemetry for amateur radio. It does this via generating `wxnow.txt`. 
