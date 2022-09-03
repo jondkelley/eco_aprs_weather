@@ -1,7 +1,8 @@
+### Configuration
 
-The software is written to just work out of the box. By that, it pumps out metrics!
+The software is written to just work out of the box. By that, it pumps out `wxnow.txt` the microsecond it gets ECOWITT device telemetry.
 
-You can squeeze more juice out of the box with custom configuration explained below.
+However, a custom configuration offers flexibility beyond the assumptions I made for the out-of-box experience.
 
 - [Custom Configuration](#custom-configuration)
   * [Custom Sensor Mappings](#custom-sensor-mappings)
