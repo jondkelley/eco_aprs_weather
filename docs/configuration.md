@@ -4,7 +4,7 @@ The software is written to just work out of the box. By that, it pumps out `wxno
 
 However, a custom configuration offers flexibility beyond the assumptions I made for the out-of-box experience.
 
-**NOTE: You should have some experience with `vi` text editing or the ability to copy files around in the system you plan to run this on. These skills are required to create a custom configuration, as described below.**
+***NOTE: You should have some experience with `vi` text editing or the ability to copy files around in the system you plan to run this on. These skills are required to create a custom configuration, as described below.***
 
 - [Custom Configuration](#custom-configuration)
   * [Custom Sensor Mappings](#custom-sensor-mappings)
