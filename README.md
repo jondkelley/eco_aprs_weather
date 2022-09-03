@@ -36,7 +36,7 @@ Hi I'm N5IPT, or Jon.
 
 The `eco_aprs_weather` software is a bridge to allow for the ~$120 [ECOWITT Weather Stations](https://amzn.to/3CItgFH) so that it can output APRS weather onto terrestrial telemetry for amateur radio. It does this via generating `wxnow.txt`. 
 
-The biggest strength of this software is redundancy of weather packets. This software gets data directly from your weather station. You setup your digipeater transmit collected weather frames over RF and/or send to APRS-IS.
+The biggest strength of this software is ability to send of weather packets with zero internet access. Chances are it ends up on the internet from a local I-GATE in your area anyway. This software gets data directly from your weather station over a LAN.
 
 A lot of other APRS weather software collectors seem to require polling weather data from an online API like weather underground, but if your internet is offline your weather data has no chance of being reported to anyone. This projects goal is to require as little internet infrastructure as possible to function.
 
