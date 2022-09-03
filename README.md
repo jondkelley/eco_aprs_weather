@@ -12,6 +12,11 @@
   - [SNAP Package (For Amateurs)](#snap-package--for-amateurs-)
   - [Install Using Python / Pip (For Intermediates)](#install-using-python---pip--for-intermediates-)
   - [Install Using Docker (For Experts Only)](#install-using-docker--for-experts-only-)
++ Documentation
+  - [Configuration File bridge.conf](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/configuration.md)
+  - [Troubleshooting Tips](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/troubleshooting.md)
+  - [Web/API Specification Docs](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/webapi_spec.md)
+  - [wxnow.txt format specifications](https://github.com/jondkelley/eco_aprs_weather/blob/master/docs/architectural_references/wxnow_txt.md)
 + [Starting the `eco_aprs_weather` service](#starting-the--eco-aprs-weather--service)
 + [Stopping the `eco_aprs_weather` service](#stopping-the--eco-aprs-weather--service)
 + [Ecowitt App Configuration](#ecowitt-app-configuration)
