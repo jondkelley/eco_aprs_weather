@@ -36,7 +36,9 @@ Hi I'm N5IPT, or Jon.
 
 The `eco_aprs_weather` software is a bridge to allow for the ~$120 [ECOWITT Weather Stations](https://amzn.to/3CItgFH) so that it can output APRS weather onto terrestrial telemetry for amateur radio. It does this via generating `wxnow.txt`. 
 
-A lot of software only takes this stuff from igate, or from wunderground to APRS-IS. This tries to bridge the gap. It is a bridge!
+The biggest strength of this software is redundancy of weather packets. This software gets data directly from your weather station. You setup your digipeater transmit collected weather frames over RF and/or send to APRS-IS.
+
+A lot of other APRS weather software collectors seem to require polling weather data from an online API like weather underground, but if your internet is offline your weather data has no chance of being reported to anyone. This projects goal is to require as little internet infrastructure as possible to function.
 
 If you want a project you can do in a weekend with full weather on APRS try the ~$120 [ECOWITT Weather Stations](https://amzn.to/3CItgFH) gateway and this software can bridge the gap. This was compelling to me because it can run on a Raspberry Pi, minimal power, and the weather station gateway itself only needs USB power. HAM radio operators got this. The outdoor [Solar Powered Anemometer](https://amzn.to/3Cz1Fqh) and [Self-Emptying Rain Gauge](https://amzn.to/3RfKbmP) use AA batteries.
 
