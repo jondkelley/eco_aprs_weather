@@ -35,7 +35,9 @@ humidity_sensor = humidity2
 barometer = absolute
 ```
 
-*NOTE 1: All section names, for example `[General]` should only be listed once with associated settings underneath. If you have duplicate section names, things may not work as expected. Confusion may result.*
+*NOTE 1: You don't have to copy and use every option above, this just documents all the available optons!* Remember, this app works with ZERO config. *Don't define options or features you don't want or need!*
+
+*NOTE 2: All section names, for example `[General]` should only be listed once with associated settings underneath. If you have duplicate section names, things may not work as expected. Confusion may result.*
 
 #### Custom Sensor Mappings
 
