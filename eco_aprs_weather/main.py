@@ -233,7 +233,6 @@ def wxnow():
         PBEACON sendto=IG delay=0:10 every=5 lat=1.000000 long=-1.000000 SYMBOL="weather station" COMMENTCMD="curl -s http://192.168.1.250:5000/wxnow.txt | tail -1"
     to igate your WX data every 5 minutes
     """
-    callsign = f'{configuration.call} '
     probes = {
         'temp_outdoor': configuration.sensor_temp,
         'humidity_outdoor': configuration.sensor_humidity
@@ -291,7 +290,7 @@ def wxnow():
         print(f'last report={duration_in_s} seconds ago')
         if duration_in_s >= configuration.stale_threshold:
             #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            error = f'{callsign}Weather station temporarily OFF AIR, no data from ECOWITT gw for over {duration_in_s} seconds\n'
+            error = f'Weather station temporarily OFF AIR, no data from ECOWITT gw for over {duration_in_s} seconds\n'
             winddir = 0
             windspeedmph = 0
             windgustmph = 0
@@ -303,7 +302,7 @@ def wxnow():
             barorel = 0
     else:
         #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-        error = f'{callsign}Weather station temporarily OFF AIR, no data received from ECOWITT gw since starting the bridge\n'
+        error = f'Weather station temporarily OFF AIR, no data received from ECOWITT gw since starting the bridge\n'
         winddir = 0
         windspeedmph = 0
         windgustmph = 0
