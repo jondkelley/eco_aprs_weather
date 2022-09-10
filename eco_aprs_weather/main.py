@@ -290,7 +290,7 @@ def wxnow():
         print(f'last report={duration_in_s} seconds ago')
         if duration_in_s >= configuration.stale_threshold:
             #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            error = f'Weather station temporarily OFF AIR, no data from ECOWITT gw for over {duration_in_s} seconds\n'
+            error = f'[WX.Tmp.OffAir:NODATA in {duration_in_s}S] {configuration.status}\n'
             winddir = 0
             windspeedmph = 0
             windgustmph = 0
@@ -302,7 +302,7 @@ def wxnow():
             barorel = 0
     else:
         #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-        error = f'Weather station temporarily OFF AIR, no data received from ECOWITT gw since starting the bridge\n'
+        error = f'[WX.Tmp.OffAir:Waiting for ECOWITT GW] {configuration.status}\n'
         winddir = 0
         windspeedmph = 0
         windgustmph = 0
