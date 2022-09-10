@@ -44,7 +44,34 @@ class Configuration(object):
          cls.instance = super(Configuration, cls).__new__(cls)
       return cls.instance
 
-class TelemetrySingleton(object):
+class AprsTelemetrySingleton(object):
+   def __init__(self):
+      # used for iterative telemetry sequence order numbering
+      self.sequence = 0
+      self.analog = {
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0
+      }
+      self.bool = {
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        7: 0,
+        8: 0
+      }
+   def __new__(cls):
+      if not hasattr(cls, 'instance'):
+         cls.instance = super(AprsTelemetrySingleton, cls).__new__(cls)
+      return cls.instance
+
+class WxTelemetrySingleton(object):
    """
    this singleton stores a snapshot of the latest telemetry packet in memory
    """
@@ -58,7 +85,7 @@ class TelemetrySingleton(object):
         }
    def __new__(cls):
       if not hasattr(cls, 'instance'):
-         cls.instance = super(TelemetrySingleton, cls).__new__(cls)
+         cls.instance = super(WxTelemetrySingleton, cls).__new__(cls)
       return cls.instance
 
 @app.errorhandler(500)
@@ -77,7 +104,8 @@ class WeatherSingleton(object):
          cls.instance = super(WeatherSingleton, cls).__new__(cls)
       return cls.instance
 
-singleton = TelemetrySingleton()
+telemetry = AprsTelemetrySingleton()
+singleton = WxTelemetrySingleton()
 wx = WeatherSingleton()
 configuration = Configuration()
 def calculate_24hour_rainfall():
@@ -124,6 +152,74 @@ def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin
     wxnow = date + ''.join(fields) + f'{callsign}{configuration.status}\n'
     return wxnow
 
+@app.route('/get/telemetry/bit/<field>', methods=['GET'])
+def telemtry_bit_get(field):
+    """
+    gets a telemtry bit field boolean value
+    useful if you want to exend some external tooling into APRS telemetry
+    """
+    status = {
+      'value': telemetry.bool[int(field)]
+    }
+    return status
+
+@app.route('/set/telemetry/bit/<field>/<value>', methods=['GET'])
+def telemtry_bit_set(field, value):
+    """
+    sets a telemtry bit field boolean value
+    useful if you want to exend some external tooling into APRS telemetry
+    """
+    if int(value) == telemetry.bool[int(field)]:
+      drift = 'NOCHANGE'
+    else:
+      drift = 'CHANGED'
+    if int(value)  > 1:
+      raise Exception('value cannot be greater than 1')
+    telemetry.bool[int(field)] = int(value)
+    status = {
+      'bit_status': drift,
+      'value': int(value)
+    }
+    return status
+
+@app.route('/telemetry/parm', methods=['GET'])
+def telemtry_parm():
+    return ':WESTWD   :PARM.Cpu,Temp,FreeM,RxP,TxP'
+
+@app.route('/telemetry/unit', methods=['GET'])
+def telemtry_unit():
+    if configuration.call == '':
+      call = 'N0CALL'
+    else:
+      call =configuration.call
+    call = call.ljust(9)
+    return f':{call}:UNIT.Load,DegC,Mb,Pkt,Pkt'
+
+@app.route('/telemetry/eqns', methods=['GET'])
+def telemtry_eqns():
+    if configuration.call == '':
+      call = 'N0CALL'
+    else:
+      call =configuration.call
+    call = call.ljust(9)
+    return f':{call}:EQNS.0,1,0,0,1,0,0,1,0,0,1,0,0,1,0'
+
+def poll_aprs_telemetry():
+    pass
+
+@app.route('/telemetry/sequence', methods=['GET'])
+def telemtry_seq():
+    # resume sequence numbering where we left off
+    if telemetry.sequence > 255:
+      telemetry.sequence = 0
+    seq = str(f'{telemetry.sequence:03d}')
+    telemetry.sequence += 1
+    # do stuff
+    telem = f'{telemetry.analog[0]},{telemetry.analog[1]},{telemetry.analog[2]},{telemetry.analog[3]},{telemetry.analog[4]}'
+    bits = f'{telemetry.bool[0]}{telemetry.bool[1]}{telemetry.bool[2]}{telemetry.bool[3]}{telemetry.bool[4]}{telemetry.bool[5]}{telemetry.bool[6]}{telemetry.bool[7]}'
+    message = f'T#{seq},{telem},{bits}'
+    return message
+
 @app.route('/wxnow.txt', methods=['GET'])
 def wxnow():
     """
@@ -153,7 +249,51 @@ def wxnow():
         date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
         wxnow = date + f'{callsign}wx OFF AIR-software bridge ready but no WX report from ECOWITT gw received yet\n'
         return wxnow
-    return generate_telemetry(winddir=singleton.weather['winddir'],windspeedmph=singleton.weather['windspeedmph'],windgustmph=singleton.weather['windgustmph'],hourlyrainin=singleton.weather['hourlyrainin'],dailyrainin=singleton.weather['dailyrainin'],temp_outdoor=singleton.weather[probes['temp_outdoor']],humidity_outdoor=singleton.weather[probes['humidity_outdoor']],baromabsin=singleton.weather['baromabsin'],baromrelin=singleton.weather['baromrelin'])
+    try:
+        winddir = singleton.weather['winddir']
+    except KeyError:
+        winddir = 0
+    try:
+        windspeedmph = singleton.weather['windspeedmph']
+    except KeyError:
+        windspeedmph = 0
+    try:
+        windgustmph = singleton.weather['windgustmph']
+    except KeyError:
+        windgustmph = 0
+    try:
+        hourlyrainin = singleton.weather['hourlyrainin']
+    except KeyError:
+        hourlyrainin = 0
+    try:
+        dailyrainin = singleton.weather['dailyrainin']
+    except KeyError:
+        dailyrainin = 0
+    try:
+        dailyrainin = singleton.weather['dailyrainin']
+    except KeyError:
+        dailyrainin = 0
+    try:
+        tempoutside = singleton.weather[probes['temp_outdoor']]
+    except KeyError:
+        tempoutside = 999
+    try:
+        tempoutside = singleton.weather[probes['temp_outdoor']]
+    except KeyError:
+        tempoutside = 999
+    try:
+        humidityoutside = singleton.weather[probes['humidity_outdoor']]
+    except KeyError:
+        humidityoutside = 0
+    try:
+        baroabs = singleton.weather[probes['baromabsin']]
+    except KeyError:
+        baroabs = 0
+    try:
+        barorel = singleton.weather[probes['baromrelin']]
+    except KeyError:
+        barorel = 0
+    return generate_telemetry(winddir=winddir,windspeedmph=windspeedmph,windgustmph=windgustmph,hourlyrainin=hourlyrainin,dailyrainin=dailyrainin,temp_outdoor=tempoutside,humidity_outdoor=humidityoutside,baromabsin=baroabs,baromrelin=barorel)
 
 
 @app.route('/data/metrics.json', methods=['GET'])
