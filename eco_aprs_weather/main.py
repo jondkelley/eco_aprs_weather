@@ -272,7 +272,7 @@ def wxnow():
     try:
         humidityoutside = singleton.weather[probes['humidity_outdoor']]
     except KeyError:
-        humidityoutside = 0
+        humidityoutside = 999
     try:
         baroabs = singleton.weather[probes['baromabsin']]
     except KeyError:
