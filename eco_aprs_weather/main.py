@@ -125,7 +125,7 @@ def calculate_24hour_rainfall():
             total_rainfall = total_rainfall + float(rainfall)
    return total_rainfall
 
-def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin,baromrelin):
+def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin,baromrelin):
     callsign = f'{configuration.call} '
     if configuration.barometer == 'absolute':
         barometer = baromabsin
@@ -149,7 +149,11 @@ def generate_telemetry(winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin
     #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
     fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
-    wxnow = date + ''.join(fields) + f'{callsign}{configuration.status}\n'
+    if error:
+      message = error
+    else:
+      message = configuration.status
+    wxnow = date + ''.join(fields) + f'{callsign}{message}\n'
     return wxnow
 
 @app.route('/get/telemetry/bit/<field>', methods=['GET'])
@@ -234,21 +238,6 @@ def wxnow():
         'temp_outdoor': configuration.sensor_temp,
         'humidity_outdoor': configuration.sensor_humidity
     }
-    
-    if singleton.weather.get('dateutc'):
-        now = datetime.datetime.utcnow()
-        loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
-        elapsed = now - loop_dt
-        duration_in_s = elapsed.total_seconds()
-        print(f'last report={duration_in_s} seconds ago')
-        if duration_in_s >= configuration.stale_threshold:
-            date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            wxnow = date + f'{callsign}wx OFF AIR-No data from ECOWITT gw for over {configuration.stale_threshold}s\n'
-            return wxnow
-    else:
-        date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-        wxnow = date + f'{callsign}wx OFF AIR-software bridge ready but no WX report from ECOWITT gw received yet\n'
-        return wxnow
     try:
         winddir = singleton.weather['winddir']
     except KeyError:
@@ -293,7 +282,39 @@ def wxnow():
         barorel = singleton.weather[probes['baromrelin']]
     except KeyError:
         barorel = 0
-    return generate_telemetry(winddir=winddir,windspeedmph=windspeedmph,windgustmph=windgustmph,hourlyrainin=hourlyrainin,dailyrainin=dailyrainin,temp_outdoor=tempoutside,humidity_outdoor=humidityoutside,baromabsin=baroabs,baromrelin=barorel)
+    error = None
+    if singleton.weather.get('dateutc'):
+        now = datetime.datetime.utcnow()
+        loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
+        elapsed = now - loop_dt
+        duration_in_s = elapsed.total_seconds()
+        print(f'last report={duration_in_s} seconds ago')
+        if duration_in_s >= configuration.stale_threshold:
+            #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
+            error = f'{callsign}Weather station temporarily OFF AIR, no data from ECOWITT gw for over {duration_in_s} seconds\n'
+            winddir = 0
+            windspeedmph = 0
+            windgustmph = 0
+            hourlyrainin = 0
+            dailyrainin = 0
+            tempoutside = 999
+            humidityoutside = 0
+            baroabs = 0
+            barorel = 0
+    else:
+        #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
+        error = f'{callsign}Weather station temporarily OFF AIR, no data received from ECOWITT gw since starting the bridge\n'
+        winddir = 0
+        windspeedmph = 0
+        windgustmph = 0
+        hourlyrainin = 0
+        dailyrainin = 0
+        tempoutside = 999
+        humidityoutside = 0
+        baroabs = 0
+        barorel = 0
+        #return wxnow
+    return generate_telemetry(error=error,winddir=winddir,windspeedmph=windspeedmph,windgustmph=windgustmph,hourlyrainin=hourlyrainin,dailyrainin=dailyrainin,temp_outdoor=tempoutside,humidity_outdoor=humidityoutside,baromabsin=baroabs,baromrelin=barorel)
 
 
 @app.route('/data/metrics.json', methods=['GET'])
