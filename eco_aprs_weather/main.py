@@ -287,10 +287,11 @@ def wxnow():
         loop_dt = datetime.datetime.strptime(singleton.weather.get('dateutc'), '%Y-%m-%d+%H:%M:%S')
         elapsed = now - loop_dt
         duration_in_s = elapsed.total_seconds()
-        print(f'last report={duration_in_s} seconds ago')
+        t = int(duration_in_s)
+        print(f'last report={t} seconds ago')
         if duration_in_s >= configuration.stale_threshold:
             #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-            error = f'[WX.Tmp.OffAir:NODATA in {duration_in_s}S] {configuration.status}\n'
+            error = f'[WX.Tmp.OffAir:NODATA in {t}seconds] {configuration.status}\n'
             winddir = 0
             windspeedmph = 0
             windgustmph = 0
