@@ -240,7 +240,7 @@ def wxnow():
     try:
         winddir = singleton.weather['winddir']
     except KeyError:
-        winddir = 0
+        winddir = 350
     try:
         windspeedmph = singleton.weather['windspeedmph']
     except KeyError:
