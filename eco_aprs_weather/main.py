@@ -22,6 +22,29 @@ import configparser
 import calendar
 import subprocess, shlex
 
+
+#CBEACON delay=0:45 every=5:00 SENDTO=IG infocmd="echo ':WESTWD   :PARM.Cpu,Temp,FreeM,RxP,TxP'"
+#CBEACON delay=0:45 every=5:00 SENDTO=IG infocmd="echo ':WESTWD   :UNIT.Load,DegC,Mb,Pkt,Pkt'"
+#CBEACON delay=0:45 every=5:00 SENDTO=IG infocmd="echo ':WESTWD   :EQNS.0,1,0,0,1,0,0,1,0,0,1,0,0,1,0'"
+#CBEACON delay=0:45 every=5:00 SENDTO=IG infocmd="echo T#1,1.13,54.5,52996,216,44,00000000"
+# Bit Sense / Project Title
+#:MYCALL   :BITS.XXXXXXXX,Project Title
+# X indicates the active polarity of the corresponding b value in the telemetry packets. Thus, when b = X, the value is considered true.
+# The project title may be displayed above any telemetry plot. The project title is limited to 183 bytes, with a recommended presentation length of 23 characters.
+# this would filter the character length ot 23 characers (data[:19] + '...') if len(data) > 19 else data
+
+# Telemetry Parameter Name Data
+#:MYCALL   :PARM.A1,A2,A3,A4,A5,B1,B2,B3,B4,B5,B6,B7,B8
+#Parameter name labels begin with "PARM." followed by 13 fields to name the five analog and eight binary fields. There is no length restriction on individual field lengths except that the total message contents (PARM., fields, and commas) may not exceed 197.
+
+#Telemetry Unit/Label Data
+#:MYCALL   :UNIT.A1,A2,A3,A4,A5,B1,B2,B3,B4,B5,B6,B7,B8
+#Unit/label data begins with "UNIT." followed by 13 fields to name the units for the five analog and eight binary fields. There is no length restriction on individual field lengths except that the total message contents (UNIT., fields, and commas) may not exceed 197.
+
+
+
+
+
 app = Flask(__name__)
 config = configparser.ConfigParser()
 config.read('/etc/bridge.ini')
