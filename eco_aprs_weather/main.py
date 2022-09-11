@@ -4,7 +4,7 @@ N5IPT; Jonathan Kelley (c) 2022 All Rights Reserved.
 from eco_aprs_weather import (__version__, AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
 from eco_aprs_weather.weathertelemfun import (generate_telemetry, update_wx_metric_into_memory, update_hourlyrainfall_into_memory)
 from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort, jsonify
-
+import eco_aprs_weather.lib.log
 import argparse
 import json
 import dateutil.parser
@@ -34,6 +34,7 @@ import subprocess, shlex
 #:MYCALL   :UNIT.A1,A2,A3,A4,A5,B1,B2,B3,B4,B5,B6,B7,B8
 #Unit/label data begins with "UNIT." followed by 13 fields to name the units for the five analog and eight binary fields. There is no length restriction on individual field lengths except that the total message contents (UNIT., fields, and commas) may not exceed 197.
 
+logger = logging.getLogger(__name__)
 app = Flask(__name__)
 telemetry = AprsTelemetrySingleton()
 singleton = WxTelemetrySingleton()

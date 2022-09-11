@@ -7,6 +7,8 @@ accept telemetry from the ECOWITT device
 
 from eco_aprs_weather import (AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
 import datetime
+import logging 
+logger = logging.getLogger(__name__)
 
 telemetry = AprsTelemetrySingleton()
 singleton = WxTelemetrySingleton()
@@ -56,6 +58,7 @@ def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,daily
     #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
     fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
+    logger.debug(f'fields: {fields}')
     if error:
       message = error
     else:
