@@ -36,6 +36,11 @@ import subprocess, shlex
 
 app = Flask(__name__)
 
+telemetry = AprsTelemetrySingleton()
+singleton = WxTelemetrySingleton()
+wx = WeatherSingleton()
+configuration = ConfigurationSingleton()
+
 @app.errorhandler(500)
 def fail(error):
     return 'ECOWITT internal server error, abort, abort!!!!!'
