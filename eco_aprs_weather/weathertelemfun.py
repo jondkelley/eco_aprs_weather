@@ -1,5 +1,8 @@
 """
 N5IPT; Jonathan Kelley (c) 2022 All Rights Reserved.
+
+file for helper functions that support generation of wxnow.tx or
+accept telemetry from the ECOWITT device
 """
 
 from eco_aprs_weather import (AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
