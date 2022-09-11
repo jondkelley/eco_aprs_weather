@@ -34,11 +34,11 @@ class AprsTelemetrySingleton(object):
       # used for iterative telemetry sequence order numbering
       self.sequence = 0
       self.analog = {
-        0: 0,
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0
+        0: '0',
+        1: '0',
+        2: '0',
+        3: '0',
+        4: '0'
       }
       self.bool = {
         0: 0,
