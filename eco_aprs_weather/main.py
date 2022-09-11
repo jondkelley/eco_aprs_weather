@@ -204,7 +204,7 @@ def wxnow():
         if duration_in_s >= configuration.stale_threshold:
             #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
             dateutc = singleton.weather.get('dateutc')
-            error = f'[WX.Tmp.OffAir:ERROR:NODATA in since {dateutc} ({t}sec)] {configuration.status}'
+            error = f'[WxTempOffAir:ERROR:NoNewDataFromGw since {dateutc}UTC ({t} seconds)] {configuration.status}'
             winddir = 0
             windspeedmph = 0
             windgustmph = 0
@@ -216,7 +216,7 @@ def wxnow():
             barorel = 0
     else:
         #date = datetime.datetime.utcnow().strftime("%b %d %Y %H:%M\n")
-        error = f'[WX.Tmp.OffAir:WARN:Waiting for ECOWITT GW data stream] {configuration.status}'
+        error = f'[WxTempOffAir:WARN:Waiting for ECOWITT GW data stream] {configuration.status}'
         winddir = 0
         windspeedmph = 0
         windgustmph = 0
