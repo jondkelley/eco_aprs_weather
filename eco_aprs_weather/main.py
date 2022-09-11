@@ -14,6 +14,7 @@ import time
 import datetime, pytz
 import calendar
 import subprocess, shlex
+import logging
 
 
 #CBEACON delay=0:45 every=5:00 SENDTO=IG infocmd="echo ':WESTWD   :PARM.Cpu,Temp,FreeM,RxP,TxP'"
