@@ -55,15 +55,6 @@ def telemtry_bit_get(field):
     }
     return status
 
-def RepresentsInt(s):
-    """
-    return true if value represents int
-    """
-    try: 
-        int(s)
-        return True
-    except ValueError:
-        return False
 
 @app.route('/set/telemetry/bit/<field>/<value>', methods=['GET'])
 def telemtry_bit_set(field, value):
