@@ -68,6 +68,18 @@ def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,daily
     wxnow = date + ''.join(fields) + f'{callsign}{message}\n'
     return wxnow
 
+def update_telemetry_if_weather_data_is_set(post_dict):
+    telemetrylabels = []
+    for telemetrynums in (1,2,3,4,5):
+        try:
+            telemetry.analog[telemetrynums] = post_dict[getattr(configuration, f'telemetry_bit_{telemetrynums}_source')]
+        except:
+            logger.error('could not write telemetry analog {telemetrynums}, passing...')
+            pass
+        telemetrylabels.append(getattr(configuration, f'telemetry_{telemetrynums}_label'))
+    telemetry = ",".join(telemetrylabels)
+    bitwise = ",".join(bitwiselabels)
+
 
 def update_wx_metric_into_memory(post_dict):
    """ constantly updates a table in memory with last metric totals at top of the hour """
