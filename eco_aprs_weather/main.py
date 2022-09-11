@@ -1,7 +1,7 @@
 """
 N5IPT; Jonathan Kelley (c) 2022 All Rights Reserved.
 """
-from eco_aprs_weather import (AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
+from eco_aprs_weather import (__version__, AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
 from eco_aprs_weather.weathertelemfun import (update_wx_metric_into_memory, update_hourlyrainfall_into_memory)
 from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort, jsonify
 
