@@ -95,9 +95,35 @@ def telemtry_analog_set(field, value):
     }
     return status
 
+# >>> class c:
+#         pass
+# o = c()
+# >>> setattr(o, "foo", "bar")
+# >>> o.foo
+# 'bar'
+# >>> getattr(o, "foo")
+
+
 @app.route('/telemetry/parm', methods=['GET'])
 def telemtry_parm():
-    return ':WESTWD   :PARM.Cpu,Temp,FreeM,RxP,TxP'
+    if configuration.call == '':
+      call = 'N0CALL'
+    else:
+      call =configuration.call
+    call = call.ljust(9)
+    bitwiselabels = []
+    for bitwisenums in (0,1,2,3,4,5,6,7):
+        bitwiselabels.append(getattr(configuration, f'telemetry_bit_{bitwisenums}_label'))
+        print(getattr(configuration, f'telemetry_bit_{bitwisenums}_label'))
+    telemetrylabels = []
+    for telemetrynums in (1,2,3,4,5):
+        telemetrylabels.append(getattr(configuration, f'telemetry_{telemetrynums}_label'))
+        print(getattr(configuration, f'telemetry_bit_{bitwisenums}_label'))
+    telemetry = ",".join(telemetrylabels)
+    bitwise = ",".join(bitwiselabels)
+
+    labels = f'{telemetry},{bitwise}'
+    return f':{call}:PARM.{labels}'
 
 @app.route('/telemetry/unit', methods=['GET'])
 def telemtry_unit():
@@ -106,7 +132,11 @@ def telemtry_unit():
     else:
       call =configuration.call
     call = call.ljust(9)
-    return f':{call}:UNIT.Load,DegC,Mb,Pkt,Pkt'
+    telemetryunits = []
+    for telemetrynums in (1,2,3,4,5):
+        telemetryunits.append(getattr(configuration, f'telemetry_{telemetrynums}_unit'))
+    units = ",".join(telemetryunits)
+    return f':{call}:UNIT.{units}'
 
 @app.route('/telemetry/eqns', methods=['GET'])
 def telemtry_eqns():
@@ -119,6 +149,20 @@ def telemtry_eqns():
 
 def poll_aprs_telemetry():
     pass
+
+
+@app.route('/telemetry/title', methods=['GET'])
+def telemtry_title():
+    if configuration.call == '':
+      call = 'N0CALL'
+    else:
+      call =configuration.call
+    call = call.ljust(9)
+    # todo define project_title
+    project_title = configuration.telemetry_project_title
+    project_title = (project_title[:19] + '...') if len(project_title) > 19 else project_title
+    message = f':{call}:BITS.{telemetry.bool[0]}{telemetry.bool[1]}{telemetry.bool[2]}{telemetry.bool[3]}{telemetry.bool[4]}{telemetry.bool[5]}{telemetry.bool[6]}{telemetry.bool[7]},{project_title}'
+    return message
 
 @app.route('/telemetry/sequence', methods=['GET'])
 def telemtry_seq():
@@ -167,14 +211,6 @@ def wxnow():
         dailyrainin = singleton.weather['dailyrainin']
     except KeyError:
         dailyrainin = 0
-    try:
-        dailyrainin = singleton.weather['dailyrainin']
-    except KeyError:
-        dailyrainin = 0
-    try:
-        tempoutside = singleton.weather[probes['temp_outdoor']]
-    except KeyError:
-        tempoutside = 999
     try:
         tempoutside = singleton.weather[probes['temp_outdoor']]
     except KeyError:
