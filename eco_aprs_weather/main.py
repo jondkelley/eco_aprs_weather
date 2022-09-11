@@ -146,6 +146,7 @@ def wxnow():
         'temp_outdoor': configuration.sensor_temp,
         'humidity_outdoor': configuration.sensor_humidity
     }
+    logger.debug(f'temp_outdoor={configuration.sensor_temp} humidity_outdoor={configuration.sensor_humidity}')
     try:
         winddir = singleton.weather['winddir']
     except KeyError:
