@@ -50,7 +50,7 @@ class LoggerManager(object):
                 '{red1}%(filename)s:%(lineno)d '
                 '{yel1}%(levelname)s '
                 '{gre1}%(funcName)s '
-                '{res}%(message)s').format(blue1=AnsiColor.blue, red1=AnsiColor.red, yel1=AnsiColor.yellow, res=AnsiColor.end, gre1=AnsiColor.magenta)
+                '{res}%(message)s').format(blue1=AnsiColor.blue, red1=AnsiColor.red, yel1=AnsiColor.yellow, res=AnsiColor.end, gre1=AnsiColor.green)
         if not name:
             logging.basicConfig(format=format)
             return logging.getLogger()
