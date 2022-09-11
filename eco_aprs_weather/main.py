@@ -186,10 +186,12 @@ def wxnow():
         baroabs = singleton.weather[probes['baromabsin']]
     except KeyError:
         baroabs = 0
+        logger.error('missing barometer')
     try:
         barorel = singleton.weather[probes['baromrelin']]
     except KeyError:
         barorel = 0
+        logger.error('missing barometer')
     error = None
     if singleton.weather.get('dateutc'):
         now = datetime.datetime.utcnow()

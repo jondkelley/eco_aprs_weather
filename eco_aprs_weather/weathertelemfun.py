@@ -43,6 +43,7 @@ def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,daily
     else:
         raise("Configuration error section General, key barometer Error! value must be only `absolute` or `relative`")
         exit()
+    print(f'barometer: {baromabsin}, {baromrelin}')
     dt = datetime.datetime.utcnow()
     fields = []
     fields.append("%03d" % int(winddir)) # wind dir
