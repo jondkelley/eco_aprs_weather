@@ -10,6 +10,25 @@ singleton = WxTelemetrySingleton()
 wx = WeatherSingleton()
 configuration = ConfigurationSingleton()
 
+
+def calculate_24hour_rainfall():
+   """
+   calculates rainfall within the past 24 hours since ecowitt devices only transmit the "last day" metric
+   """
+   total_rainfall = 0
+   now = datetime.datetime.utcnow()
+   for day, v in wx.hourlyrainfall.items(): 
+      for hour, rainfall in v.items():
+         time = f'{day}+{hour}:00:00'
+         loop_dt = datetime.datetime.strptime(time, '%Y-%m-%d+%H:%M:%S')
+         elapsed = now - loop_dt
+         seconds_in_a_day = 24 * 60 * 60
+         duration_in_s = elapsed.total_seconds()
+         if duration_in_s <= seconds_in_a_day:
+            total_rainfall = total_rainfall + float(rainfall)
+   return total_rainfall
+
+
 def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin,baromrelin):
     callsign = f'{configuration.call} '
     if configuration.barometer == 'absolute':
