@@ -10,6 +10,38 @@ singleton = WxTelemetrySingleton()
 wx = WeatherSingleton()
 configuration = ConfigurationSingleton()
 
+def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,dailyrainin,temp_outdoor,humidity_outdoor,baromabsin,baromrelin):
+    callsign = f'{configuration.call} '
+    if configuration.barometer == 'absolute':
+        barometer = baromabsin
+    elif configuration.barometer == 'relative':
+        barometer = baromrelin
+    else:
+        raise("Configuration error section General, key barometer Error! value must be only `absolute` or `relative`")
+        exit()
+    dt = datetime.datetime.utcnow()
+    fields = []
+    fields.append("%03d" % int(winddir)) # wind dir
+    fields.append("/%03d" % int(float(windspeedmph))) # wind speed
+    fields.append("g%03d" % int(float(windgustmph))) # gust
+    fields.append("t%03d" % int(float(temp_outdoor)))
+    fields.append("r%03d" % int(float(hourlyrainin) * 100)) # hour rain
+    fields.append("p%03d" % int(calculate_24hour_rainfall() * 100)) # rain 24
+    fields.append("P%03d" % int(float(dailyrainin)* 100)) # day rain
+    if int(humidity_outdoor) < 0 or 100 <= int(humidity_outdoor):
+        humidity_outdoor = 0
+    fields.append("h%03d" % (int(humidity_outdoor)))
+    #fields.append("b%05d" % int(float(float(singleton.weather['baromabsin']) * 33.864 * float(10)))) # barometer
+    fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10)))) # barometer
+    date = dt.strftime("%b %d %Y %H:%M\n")
+    if error:
+      message = error
+    else:
+      message = configuration.status
+    wxnow = date + ''.join(fields) + f'{callsign}{message}\n'
+    return wxnow
+
+
 def update_wx_metric_into_memory(post_dict):
    """ constantly updates a table in memory with last metric totals at top of the hour """
    # unused? utcminute = ":".join(post_dict['dateutc'].split('+')[1].split(':')[:-1])
