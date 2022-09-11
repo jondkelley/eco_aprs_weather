@@ -1,24 +1,18 @@
 """
-N5IPT (c) 2022 All Rights Reserved.
-License: Re-Distribution of this code is forbidden beyond sharing this link. Including, sharing, selling, packaging or dispensing this code for profit in any manner is strictly forbidden.
--
-This is a python webserver is used to recieve weather data over HTTP from my
-   ECOWITT GW1102 Home Weather Station (i know for a fact should be compatible with GW1004 gateway and maybe similar gateways)
-and transmit the data over HTTP to my Direwolf APRS station
-this is in very early stages of development but I plan to throw better documentation together soon!
-keep an eye on this igate for announcements when you can build your own!
-thanks to N5AMD to donating the hardware (Radio, Rasberry Pi 1 (rev 2011.12) for this project, without this the code would never have been written
+N5IPT; Jonathan Kelley (c) 2022 All Rights Reserved.
 """
 from eco_aprs_weather import __version__
-import argparse
+from eco_aprs_weather.singleton import (AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
+from eco_aprs_weather.weathertelemfun import (update_wx_metric_into_memor, update_hourlyrainfall_into_memory)
 from flask import Flask, render_template, request, make_response, url_for, send_from_directory, abort, jsonify
+
+import argparse
 import json
 import dateutil.parser
 import hashlib
 import os
 import time
 import datetime, pytz
-import configparser
 import calendar
 import subprocess, shlex
 
@@ -41,96 +35,12 @@ import subprocess, shlex
 #:MYCALL   :UNIT.A1,A2,A3,A4,A5,B1,B2,B3,B4,B5,B6,B7,B8
 #Unit/label data begins with "UNIT." followed by 13 fields to name the units for the five analog and eight binary fields. There is no length restriction on individual field lengths except that the total message contents (UNIT., fields, and commas) may not exceed 197.
 
-
-
-
-
 app = Flask(__name__)
-config = configparser.ConfigParser()
-config.read('/etc/bridge.ini')
-class Configuration(object):
-   def __init__(self):
-      self.status = config.get('General', 'telemetry_message', fallback='')
-      if not config.get('General', 'disable_telemetry_message_footer', fallback=False) and self.status != '': 
-        self.status = self.status + ' {ECOWITT}'
-      self.timezone = config.get('General', 'timezone', fallback='UTC')
-      self.call = config.get('General', 'callsign', fallback='')
-      self.listen_port = int(config.get('General', 'listen_port', fallback=5000))
-      self.listen_addr = config.get('General', 'listen_port', fallback='0.0.0.0')
-      self.stale_threshold = int(config.get('General', 'stale_data_shutdown_threshold_seconds', fallback=60))
-      self.sensor_temp = config.get('Sensor Mappings', 'temp_sensor', fallback='tempf')
-      self.sensor_humidity = config.get('Sensor Mappings', 'humidity_sensor', fallback='humidity')
-      self.barometer = config.get('Sensor Mappings', 'barometer', fallback='absolute')
-      self.max_days_telemetry_stored = config.get('Misc', 'max_days_telemetry_stored', fallback=200)
-   def __new__(cls):
-      if not hasattr(cls, 'instance'):
-         cls.instance = super(Configuration, cls).__new__(cls)
-      return cls.instance
-
-class AprsTelemetrySingleton(object):
-   def __init__(self):
-      # used for iterative telemetry sequence order numbering
-      self.sequence = 0
-      self.analog = {
-        0: 0,
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0
-      }
-      self.bool = {
-        0: 0,
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0,
-        6: 0,
-        7: 0,
-        8: 0
-      }
-   def __new__(cls):
-      if not hasattr(cls, 'instance'):
-         cls.instance = super(AprsTelemetrySingleton, cls).__new__(cls)
-      return cls.instance
-
-class WxTelemetrySingleton(object):
-   """
-   this singleton stores a snapshot of the latest telemetry packet in memory
-   """
-   def __init__(self):
-      self.weather = {
-         "dailyrainin": None,
-         "monthlyrainin": None,
-         "yearlyrainin": None,
-         "eventrainin": None,
-         "weeklyrainin": None
-        }
-   def __new__(cls):
-      if not hasattr(cls, 'instance'):
-         cls.instance = super(WxTelemetrySingleton, cls).__new__(cls)
-      return cls.instance
-
-@app.errorhandler(500)
-def fail(error):
-    return 'ECOWITT internal server error, abort, abort!!!!!'
-
-class WeatherSingleton(object):
-   """
-   this singleton stores working memory of station telemetry over period of time
-   """
-   def __init__(self):
-      self.hourlyrainfall = {}
-      self.metrics = {}
-   def __new__(cls):
-      if not hasattr(cls, 'instance'):
-         cls.instance = super(WeatherSingleton, cls).__new__(cls)
-      return cls.instance
 
 telemetry = AprsTelemetrySingleton()
 singleton = WxTelemetrySingleton()
 wx = WeatherSingleton()
-configuration = Configuration()
+configuration = ConfigurationSingleton()
 def calculate_24hour_rainfall():
    """
    calculates rainfall within the past 24 hours since ecowitt devices only transmit the "last day" metric
@@ -418,54 +328,6 @@ def purge_old_metics():
 def weather_query():
     """ read the last raw weather report out of memory """
     return singleton.weather
-
-def update_wx_metric_into_memory(post_dict):
-   """ constantly updates a table in memory with last metric totals at top of the hour """
-   # unused? utcminute = ":".join(post_dict['dateutc'].split('+')[1].split(':')[:-1])
-   utcday = post_dict['dateutc'].split('+')[0]
-   RUN_EVERY_MINUTE = False
-   if datetime.datetime.utcnow().minute in {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 0} or RUN_EVERY_MINUTE:
-      #datetime.datetime.strptime(post_dict['dateutc'], '%Y-%m-%d+%H:%M:%S').
-      post_dict = post_dict.copy()
-      del post_dict['PASSKEY']
-      del post_dict['stationtype']
-      del post_dict['model']
-      del post_dict['freq']
-      todelete = []
-      for key in post_dict:
-         if 'batt' in key:
-            todelete.append(key)
-      for key in todelete:
-            del post_dict[key]
-      todelete = []
-      for key in post_dict:
-         if 'rain' in key:
-            todelete.append(key)
-      for key in todelete:
-            del post_dict[key]
-
-      if utcday in wx.metrics:
-         wx.metrics[utcday][datetime.datetime.utcnow().strftime("%H:%M")] = post_dict
-      else:
-         wx.metrics[utcday] = {}
-         wx.metrics[utcday][datetime.datetime.utcnow().strftime("%H:%M")] = post_dict
-
-def update_hourlyrainfall_into_memory(post_dict):
-   """ constantly updates a table in memory with latest hourly rainfall totals """
-   utchour = post_dict['dateutc'].split('+')[1].split(':')[:-2][0]
-   utcday = post_dict['dateutc'].split('+')[0]
-   print(wx.hourlyrainfall)
-   if utcday in wx.hourlyrainfall:
-      try:
-          wx.hourlyrainfall[utcday][utchour] = post_dict['hourlyrainin']
-      except:
-          wx.hourlyrainfall[utcday][utchour] = 0
-   else:
-      try:
-          wx.hourlyrainfall[utcday] = {}
-          wx.hourlyrainfall[utcday][utchour] = post_dict['hourlyrainin']
-      except:
-          wx.hourlyrainfall[utcday][utchour] = 0
 
 @app.route('/data/report/', methods=['POST'])
 @app.route('/data/report', methods=['POST'])
