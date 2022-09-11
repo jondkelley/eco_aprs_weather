@@ -55,6 +55,16 @@ def telemtry_bit_get(field):
     }
     return status
 
+def RepresentsInt(s):
+    """
+    return true if value represents int
+    """
+    try: 
+        int(s)
+        return True
+    except ValueError:
+        return False
+
 @app.route('/set/telemetry/bit/<field>/<value>', methods=['GET'])
 def telemtry_bit_set(field, value):
     """
@@ -68,6 +78,32 @@ def telemtry_bit_set(field, value):
     if int(value)  > 1:
       raise Exception('value cannot be greater than 1')
     telemetry.bool[int(field)] = int(value)
+    status = {
+      'bit_status': drift,
+      'value': int(value)
+    }
+    return status
+
+def return_float_or_int_from_str(x):
+    if x%1 == 0:
+        return(int(x))
+    else:
+        return(float(x))
+
+@app.route('/set/telemetry/analog/<field>/<value>', methods=['GET'])
+def telemtry_analog_set(field, value):
+    """
+    sets a telemtry analog field value
+    useful if you want to exend some external tooling into APRS telemetry
+    """
+
+    if return_float_or_int_from_str(value) == telemetry.analog[int(field)]:
+      drift = 'NOCHANGE'
+    else:
+      drift = 'CHANGED'
+    if int(value)  > 1:
+      raise Exception('value cannot be greater than 1')
+    telemetry.bool[int(field)] = return_float_or_int_from_str(value)
     status = {
       'bit_status': drift,
       'value': int(value)
