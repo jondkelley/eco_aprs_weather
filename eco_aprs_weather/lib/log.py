@@ -59,5 +59,5 @@ class LoggerManager(object):
             LoggerManager._loggers[name] = logging.getLogger(str(name))
         return LoggerManager._loggers[name]
 
-log=LoggerManager().getLogger("yorktown")
+log=LoggerManager().getLogger("eco_aprs_weather")
 log.setLevel(level=logging.DEBUG)

@@ -59,6 +59,7 @@ def generate_telemetry(error,winddir,windspeedmph,windgustmph,hourlyrainin,daily
     fields.append("b%05d" % int(float(float(barometer) * 33.864 * float(10)))) # barometer
     date = dt.strftime("%b %d %Y %H:%M\n")
     logger.debug(f'fields: {fields}')
+    print(f'fields: {fields}')
     if error:
       message = error
     else:
