@@ -184,12 +184,12 @@ def wxnow():
     except KeyError:
         humidityoutside = 999
     try:
-        baroabs = singleton.weather[probes['baromabsin']]
+        baroabs = singleton.weather['baromabsin']
     except KeyError:
         baroabs = 0
         logger.error('missing barometer')
     try:
-        barorel = singleton.weather[probes['baromrelin']]
+        barorel = singleton.weather['baromrelin']
     except KeyError:
         barorel = 0
         logger.error('missing barometer')
