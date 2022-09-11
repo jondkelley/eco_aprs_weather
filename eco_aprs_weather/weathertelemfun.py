@@ -2,13 +2,12 @@
 N5IPT; Jonathan Kelley (c) 2022 All Rights Reserved.
 """
 
-from eco_aprs_weather import (AprsTelemetrySingleton, WxTelemetrySingleton, WeatherSingleton, ConfigurationSingleton)
-import datetime
+from eco_aprs_weather import AprsTelemetrySingleton as telemetry
+from eco_aprs_weather import WxTelemetrySingleton as singleton
+from eco_aprs_weather import WeatherSingleton as wx
+from eco_aprs_weather import ConfigurationSingleton as configuration
 
-telemetry = AprsTelemetrySingleton()
-singleton = WxTelemetrySingleton()
-wx = WeatherSingleton()
-configuration = ConfigurationSingleton()
+import datetime
 
 def update_wx_metric_into_memory(post_dict):
    """ constantly updates a table in memory with last metric totals at top of the hour """
