@@ -73,10 +73,6 @@ class WxTelemetrySingleton(object):
          cls.instance = super(WxTelemetrySingleton, cls).__new__(cls)
       return cls.instance
 
-@app.errorhandler(500)
-def fail(error):
-    return 'ECOWITT internal server error, abort, abort!!!!!'
-
 class WeatherSingleton(object):
    """
    this singleton stores working memory of station telemetry over period of time
